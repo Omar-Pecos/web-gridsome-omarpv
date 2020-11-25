@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
     <Nav />
+    <Greeting />
     <slot/>
   </div>
 </template>
@@ -15,9 +16,12 @@ query {
 
 <script>
 import Nav from '~/components/Nav';
+import Greeting from '~/components/Greeting';
+
 export default {
   components : {
-    Nav
+    Nav,
+    Greeting
   }
 }
 </script>

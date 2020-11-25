@@ -1,0 +1,213 @@
+<template>
+  <div class="greet-main" id="greeting">
+    <div class="greeting-main">
+      <div class="greeting-text-div">
+        <div>
+          <h1 class="greeting-text">
+            {{ " " }}
+            {{ "Omar Pecos" }}{{ " " }}
+            <span class="wave-emoji">
+              <g-image
+                width="25"
+                alt="Hello!"
+                src="~/assets/images/emoji_hello.png"
+              ></g-image>
+            </span>
+          </h1>
+          <p class="greeting-text-p subTitle">
+            {{ $static.profile.edges[0].node.intro }}
+          </p>
+
+          <!-- Social media  -->
+          <div class="flexdiv">
+            <div>
+              <a href="https://www.instagram.com/omarpv95/" target="_blank">
+                <g-image
+                  width="50"
+                  src="~/assets/images/instagram.png"
+                  alt="Instagram"
+                ></g-image>
+              </a>
+            </div>
+            <div>
+              <a href="https://github.com/Omar-Pecos" target="_blank">
+                <g-image
+                  width="50"
+                  src="~/assets/images/github.png"
+                  alt="GitHub"
+                ></g-image>
+              </a>
+            </div>
+            <div>
+                <a href="https://www.linkedin.com/in/omar-pecos-vales-659b741aa/" target="_blank">
+                    <g-image
+                        width="50"
+                        src="~/assets/images/linkedin.png"
+                        alt="Linkedin"
+                    ></g-image>
+                </a>
+            </div>
+          </div>
+
+          <div class="button-greeting-div">
+            <ButtonVue text="Contáctame" href="#contact" />
+          </div>
+        </div>
+      </div>
+      <div class="greeting-image-div">
+        <g-image
+          alt="saad sitting on table"
+          src="~/assets/images/manOnTable.svg"
+        ></g-image>
+      </div>
+    </div>
+  </div>
+</template>
+
+<static-query>
+query {
+  profile : allProfile {
+      edges{
+          node{
+              intro
+          }
+      }
+  }
+}
+</static-query>
+
+<script>
+import ButtonVue from "./Button.vue";
+export default {
+  components: {
+    ButtonVue,
+  },
+};
+</script>
+
+<style>
+.flexdiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+}
+
+.flexdiv > div {
+  margin: 10px;
+}
+
+.main {
+  width: 90%;
+  padding: 20px 10px;
+  margin: 0px auto;
+  margin-top: 4rem;
+}
+.greet-main {
+  width: 90%;
+  padding: 20px 10px;
+  margin: 0px auto;
+  margin-top: 2rem;
+}
+
+.gretting-main {
+  width: 90%;
+  padding: 20px 10px;
+  margin: 0px auto;
+}
+
+.subTitle {
+  color: #868e96 !important;
+}
+
+.greeting-main {
+  display: flex;
+}
+
+.greeting-main > * {
+  flex: 1;
+  margin-bottom: 30px;
+}
+.button-greeting-div {
+  display: flex;
+  margin-top: 20px;
+}
+
+.greeting-text {
+  font-size: 70px;
+  line-height: 1.1;
+  color: black !important;
+}
+
+.greeting-text-p {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.greeting-image-div > img {
+  max-width: 100%;
+  height: auto;
+}
+.wave-emoji {
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-name: wave;
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  }
+  20% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Media Query */
+@media (max-width: 1380px) {
+  .greeting-text {
+    font-size: 50px;
+  }
+  .greeting-text-p {
+    font-size: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .button-greeting-div {
+    justify-content: space-around;
+  }
+  .greeting-text {
+    font-size: 30px;
+    text-align: center;
+  }
+  .greeting-text-p {
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+  }
+  .greeting-main {
+    display: block;
+  }
+
+  .flexdiv {
+    justify-content: center;
+  }
+}
+</style>
