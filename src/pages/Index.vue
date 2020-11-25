@@ -11,6 +11,7 @@
     </p>
 
     <p class="home-links">
+      <g-link to="/about/">About</g-link>
       <a href="https://gridsome.org/docs/" target="_blank" rel="noopener">Gridsome Docs</a>
       <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
     </p>
@@ -21,7 +22,7 @@
 <script>
 export default {
   metaInfo: {
-    title: 'Hello, world!'
+    title: 'Omar Pecos web'
   }
 }
 </script>
