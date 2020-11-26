@@ -34,7 +34,7 @@
       </label>
       <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
         <li>
-          <a href="#skills">Skills</a>
+          <a href="#skills">Aptitudes</a>
         </li>
         <li>
           <a href="#experience">Work Experiences</a>

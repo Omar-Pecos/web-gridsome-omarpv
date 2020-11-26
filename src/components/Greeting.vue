@@ -1,11 +1,11 @@
 <template>
-  <div class="greet-main" id="greeting">
+  <div class="greet-main animated fadeInBottom" id="greeting" >
     <div class="greeting-main">
       <div class="greeting-text-div">
         <div>
           <h1 class="greeting-text">
             {{ " " }}
-            {{ "Omar Pecos" }}{{ " " }}
+            {{ "Hola, soy Omar Pecos" }}{{ " " }}
             <span class="wave-emoji">
               <g-image
                 width="25"
@@ -56,7 +56,7 @@
       </div>
       <div class="greeting-image-div">
         <g-image
-          alt="saad sitting on table"
+          alt="omar sentado en una mesa"
           src="~/assets/images/manOnTable.svg"
         ></g-image>
       </div>
@@ -86,6 +86,28 @@ export default {
 </script>
 
 <style>
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fadeInBottom{
+  -webkit-animation-name: fadeInBottom;
+  animation-name: fadeInBottom;
+}
+
 .flexdiv {
   display: flex;
   justify-content: flex-start;

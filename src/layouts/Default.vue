@@ -2,6 +2,7 @@
   <div class="layout">
     <Nav />
     <Greeting />
+    <Skills />
     <slot/>
   </div>
 </template>
@@ -17,11 +18,13 @@ query {
 <script>
 import Nav from '~/components/Nav';
 import Greeting from '~/components/Greeting';
+import Skills from '~/components/Skills';
 
 export default {
   components : {
     Nav,
-    Greeting
+    Greeting,
+    Skills
   }
 }
 </script>

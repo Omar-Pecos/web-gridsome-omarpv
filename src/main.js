@@ -4,8 +4,11 @@
 
 import '~/assets/styles.css';
 import DefaultLayout from '~/layouts/Default.vue'
+import VueWaypoint from 'vue-waypoint'
+
 
 export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
+  Vue.use(VueWaypoint)
 }
