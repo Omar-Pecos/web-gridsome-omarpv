@@ -1,6 +1,9 @@
 <template>
-  <div class="main" id="skills">
-      <div id="#skills" v-waypoint="{ active: true, callback: onWaypoint}"></div>
+  <div class="main" >
+
+    <!-- Ancla -->
+      <div id="skills" v-waypoint="{ active: true, callback: onWaypoint}"></div>
+  
     <div class="skills-main-div">
       <!-- Transition left -->
       <div class="skills-image-div animated">
@@ -55,7 +58,7 @@
 
 <static-query>
 query {
-    profile : allProfile (sortBy : "type") {
+    profile : allProfile{
         edges{
             node{
                 about{
@@ -143,6 +146,7 @@ export default {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+  animation-delay: 250ms;
 }
 
 @keyframes fadeInLeft {

@@ -37,7 +37,7 @@
           <a href="#skills">Aptitudes</a>
         </li>
         <li>
-          <a href="#experience">Work Experiences</a>
+          <a href="#stack">Mi Stack</a>
         </li>
         <li>
           <a href="#opensource">Open Source</a>
