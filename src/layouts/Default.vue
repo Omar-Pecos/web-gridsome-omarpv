@@ -2,12 +2,9 @@
   <div class="layout">
 
     <Nav />
-    <Greeting />
-    <Skills />
-    <Progress />
-    <slot/>
-  
-    <ScrollToTop />
+      <slot/>
+
+   <ScrollToTop />
 
   </div>
 </template>
@@ -22,17 +19,11 @@ query {
 
 <script>
 import Nav from '~/components/Nav';
-import Greeting from '~/components/Greeting';
-import Skills from '~/components/Skills';
-import Progress from '~/components/Progress';
 import ScrollToTop from '~/components/ScrollToTop';
 
 export default {
   components : {
     Nav,
-    Greeting,
-    Skills,
-    Progress,
     ScrollToTop
   }
 }

@@ -40,10 +40,10 @@
           <a href="#stack">Mi Stack</a>
         </li>
         <li>
-          <a href="#opensource">Open Source</a>
+          <a href="#education">Formación</a>
         </li>
         <li>
-          <a href="#achievements">Achievements</a>
+          <a href="#courses">Cursos</a>
         </li>
         <li>
           <a href="#blogs">Blogs</a>

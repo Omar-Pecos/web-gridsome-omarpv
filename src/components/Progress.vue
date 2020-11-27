@@ -41,7 +41,7 @@
        
        <div class="skills-bar" v-if="profile">
            <p id="imgSvg" style="text-align: center;" >
-                <g-image alt="Skills" src="~/assets/images/skill.svg" style="width : 20vh margin-left: -50px;"></g-image>
+                <g-image alt="Skills" src="~/assets/images/skill.svg" style="width : 20vh; margin-left: -50px;"></g-image>
              </p>
 
             <div
@@ -116,6 +116,10 @@ export default {
 
             var skillsContainer = document.getElementsByClassName('skills-container').item(0);
             skillsContainer.classList.add("fadeInBottom");
+
+             setTimeout(() =>{
+                    skillsContainer.classList.remove("fadeInBottom");
+                }, 3000);
         }
     },
     getColor(type){
@@ -177,7 +181,7 @@ export default {
 @keyframes fadeInBottom {
   0% {
     opacity: 0;
-    transform: translateY(250px);
+    transform: translateY(350px);
   }
   100% {
     opacity: 1;

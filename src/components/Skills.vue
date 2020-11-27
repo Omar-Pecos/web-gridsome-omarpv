@@ -103,31 +103,36 @@ export default {
                 var skillsImageDiv = document.getElementsByClassName('skills-image-div').item(0);
                 skillsImageDiv.classList.add("fadeInLeft");
 
-                var skillsImageDiv = document.getElementsByClassName('skills-text-div').item(0);
-                skillsImageDiv.classList.add("fadeInRight");
+                var skillsTextDiv = document.getElementsByClassName('skills-text-div').item(0);
+                skillsTextDiv.classList.add("fadeInRight");
+
+                 setTimeout(() =>{
+                    skillsImageDiv.classList.remove("fadeInLeft");
+                    skillsTextDiv.classList.remove("fadeInRight");
+                }, 3000);
             }
         },
          styleTechName(type){
           var color = 'black';
           switch(type){
             case 'backend':
-              color = '#C64E4E';
-              break;
+            color = '#C64E4E';
+            break;
             case 'frontend':
-              color = '#47C163';
-              break;
+            color = '#47C163';
+            break;
             case 'design':
-              color = '#808080';
-              break;
+            color = '#808080';
+            break;
             case 'game':
-              color = '#2F4F4F';
-              break;
+            color = 'orange';
+            break;
             case 'native':
-              color = 'brown';
-              break;
+            color = 'plum';
+            break;
             case 'hybrid':
-              color = '#3F3FB6';
-              break;
+            color = '#3F3FB6';
+            break;
           }
 
             return {
