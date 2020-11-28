@@ -5,7 +5,8 @@
     <Skills />
     <Progress />
     <Education />
-
+    <Projects />
+    <Contact />
 
   </Layout>
 </template>
@@ -16,6 +17,8 @@ import Greeting from '~/components/Greeting';
 import Skills from '~/components/Skills';
 import Progress from '~/components/Progress';
 import Education from '~/components/Education';
+import Projects from '~/components/Projects';
+import Contact from '~/components/Contact';
 
 
 export default {
@@ -26,7 +29,9 @@ export default {
     Greeting,
     Skills,
     Progress,
-    Education
+    Education,
+    Projects,
+    Contact
   }
 }
 </script>

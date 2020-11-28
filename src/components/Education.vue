@@ -103,9 +103,13 @@ query {
 
 <script>
 export default {
+    data(){
+        return{
+            active : true
+        }
+    },
     methods:{
         pathToImg( platform){
-            console.log(platform);
             return `https://res.cloudinary.com/omarpvcloud/image/upload/v1606471573/logos/${platform}.png`;
         },
         onWaypointLeft(waypoint){

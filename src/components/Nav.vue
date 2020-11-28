@@ -1,12 +1,5 @@
 <template>
   <div class="layout">
-    <head>
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-        rel="stylesheet"
-      />
-    </head>
     <!-- nav -->
     <header class="header">
       <a
@@ -46,13 +39,13 @@
           <a href="#courses">Cursos</a>
         </li>
         <li>
-          <a href="#blogs">Blogs</a>
+          <a href="#projects">Proyectos</a>
         </li>
         <li>
-          <a href="#talks">Talks</a>
+          <a href="/portfolio">Portfolio</a>
         </li>
         <li>
-          <a href="#contact">Contact Me</a>
+          <a href="#contact">Contacto</a>
         </li>
       </ul>
     </header>
