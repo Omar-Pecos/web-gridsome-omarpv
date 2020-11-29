@@ -3,7 +3,7 @@
     <!-- nav -->
     <header class="header">
       <a
-        href=""
+        href="/"
         class="logo"
         v-bind:style="{ display: [menuDisplay ? 'none' : 'block'] }"
       >
@@ -27,25 +27,25 @@
       </label>
       <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
         <li>
-          <a href="#skills">Aptitudes</a>
+          <a href="/#skills">Aptitudes</a>
         </li>
         <li>
-          <a href="#stack">Mi Stack</a>
+          <a href="/#stack">Mi Stack</a>
         </li>
         <li>
-          <a href="#education">Formación</a>
+          <a href="/#education">Formación</a>
         </li>
         <li>
-          <a href="#courses">Cursos</a>
+          <a href="/#courses">Cursos</a>
         </li>
         <li>
-          <a href="#projects">Proyectos</a>
+          <a href="/#projects">Proyectos</a>
         </li>
         <li>
-          <a href="/portfolio">Portfolio</a>
+          <g-link to="/portfolio">Portfolio</g-link>
         </li>
         <li>
-          <a href="#contact">Contacto</a>
+          <a href="/#contact">Contacto</a>
         </li>
       </ul>
     </header>
