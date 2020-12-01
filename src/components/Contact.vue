@@ -7,7 +7,7 @@
         <h1 class="heading contact-title">Omar Pecos</h1>
         <p class="subTitle contact-subtitle">Desarrollador Full Stack</p>
 
-        <p class="location">
+        <span class="location">
           <svg
             viewBox="0 0 12 16"
             version="1.1"
@@ -21,7 +21,7 @@
             ></path>
           </svg>
           Huelva, Andalucía, España
-        </p>
+        </span>
 
         <div class="contact-text-div">
           <a class="contact-detail" href="tel:634521429"> 634521429 </a>

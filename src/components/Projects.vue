@@ -1,71 +1,72 @@
 <template>
-<div>
-  <div class="projects-main animated">
-    <div
-      id="projects"
-      v-waypoint="{ active: true, callback: onWaypoint }"
-    ></div>
-    <h1 class="project-title">Proyectos</h1>
-    <div class="repo-cards-div-main" v-if="completeData">
-      <ProjectCard
-        v-for="project of pinned"
-        :key="project.id"
-        :project="project"
+  <div>
+    <div class="projects-main animated">
+      <div
+        id="projects"
+        v-waypoint="{ active: true, callback: onWaypoint }"
+      ></div>
+      <h1 class="project-title">Proyectos</h1>
+      <div class="repo-cards-div-main" v-if="completeData">
+        <ProjectCard
+          v-for="project of pinned"
+          :key="project.id"
+          :project="project"
+        />
+      </div>
+
+      <Button
+        text="Otros Proyectos"
+        class="project-button"
+        href="#otherprojects"
       />
-    </div>
-    <Button
-      text="Otros Proyectos"
-      class="project-button"
-      href="#otherprojects"
-    />
 
-     <Button
-      text="Portfolio"
-      class="project-button"
-      href="/portfolio"
-    />
-  </div>
+     <div class="project-button">
+       <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
+        <a class="main-button"  @click="openUrl('/web/portfolio/')" >Portfolio</a>
+      </div>
 
-   <div class="projects-main animated">
-    <div
-      id="otherprojects"
-      v-waypoint="{ active: true, callback: onWaypointOther }"
-    ></div>
-    <h1 class="project-title">Otros Proyectos</h1>
-    <div class="repo-cards-div-main" v-if="completeData">
-        <ProjectCard
-          :key="allProjects.backend[ indexes.backend ].id"
-          :project="allProjects.backend[ indexes.backend ]"
-        />
-        <ProjectCard
-          :key="allProjects.design[ indexes.design ].id"
-          :project="allProjects.design[ indexes.design ]"
-        />
-        <ProjectCard
-          :key="allProjects.fullstack[ indexes.fullstack ].id"
-          :project="allProjects.fullstack[ indexes.fullstack ]"
-        />
-        <ProjectCard
-          :key="allProjects.frontend[ indexes.frontend ].id"
-          :project="allProjects.frontend[ indexes.frontend ]"
-        />
-        <ProjectCard
-          :key="allProjects.game[ indexes.game ].id"
-          :project="allProjects.game[ indexes.game ]"
-        />
-        <ProjectCard
-          :key="allProjects.hybrid[ indexes.hybrid ].id"
-          :project="allProjects.hybrid[ indexes.hybrid ]"
-        />
     </div>
 
-     <Button
-      text="Portfolio"
-      class="project-button"
-      href="/portfolio"
-    />
+    <div class="projects-main animated">
+      <div
+        id="otherprojects"
+        v-waypoint="{ active: true, callback: onWaypointOther }"
+      ></div>
+      <h1 class="project-title">Otros Proyectos</h1>
+      <div class="repo-cards-div-main" v-if="completeData">
+        <ProjectCard
+          :key="allProjects.backend[indexes.backend].id"
+          :project="allProjects.backend[indexes.backend]"
+        />
+        <ProjectCard
+          :key="allProjects.design[indexes.design].id"
+          :project="allProjects.design[indexes.design]"
+        />
+        <ProjectCard
+          :key="allProjects.fullstack[indexes.fullstack].id"
+          :project="allProjects.fullstack[indexes.fullstack]"
+        />
+        <ProjectCard
+          :key="allProjects.frontend[indexes.frontend].id"
+          :project="allProjects.frontend[indexes.frontend]"
+        />
+        <ProjectCard
+          :key="allProjects.game[indexes.game].id"
+          :project="allProjects.game[indexes.game]"
+        />
+        <ProjectCard
+          :key="allProjects.hybrid[indexes.hybrid].id"
+          :project="allProjects.hybrid[indexes.hybrid]"
+        />
+      </div>
+
+      <div class="project-button">
+         <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
+         <a class="main-button"  @click="openUrl('/web/portfolio/')" >Portfolio</a>
+      </div>
+
+    </div>
   </div>
-</div>
 </template>
 
 <static-query>
@@ -97,45 +98,45 @@ import Button from "~/components/Button";
 import ProjectCard from "~/components/ProjectCard";
 
 export default {
-  created(){
-   this.$static.projects.edges.map(edge =>{
-     this.allProjects[ edge.node.type ].push( edge.node );
-     if ( edge.node.pinned)
-        this.pinned.push( edge.node );
-   });
+  created() {
+    this.$static.projects.edges.map((edge) => {
+      this.allProjects[edge.node.type].push(edge.node);
+      if (edge.node.pinned) this.pinned.push(edge.node);
+    });
 
-   this.selectIndex(this.allProjects.backend.length, 'backend');
-   this.selectIndex(this.allProjects.frontend.length, 'frontend');
-   this.selectIndex(this.allProjects.fullstack.length, 'fullstack');
-   this.selectIndex(this.allProjects.design.length, 'design');
-   this.selectIndex(this.allProjects.game.length, 'game');
-   this.selectIndex(this.allProjects.hybrid.length, 'hybrid');
+    this.selectIndex(this.allProjects.backend.length, "backend");
+    this.selectIndex(this.allProjects.frontend.length, "frontend");
+    this.selectIndex(this.allProjects.fullstack.length, "fullstack");
+    this.selectIndex(this.allProjects.design.length, "design");
+    this.selectIndex(this.allProjects.game.length, "game");
+    this.selectIndex(this.allProjects.hybrid.length, "hybrid");
 
-   this.completeData = true;
+    this.completeData = true;
     //console.log(this.allProjects);
     //console.log(this.indexes);
   },
   data() {
     return {
       active: true,
-      completeData : false,
-      pinned : [],
-      allProjects : {
-        backend : [],
-        frontend : [],
-        fullstack : [],
-        game : [],
-        design : [],
-        hybrid : []
+      webUrl: "https://omarpecos.com/web",
+      completeData: false,
+      pinned: [],
+      allProjects: {
+        backend: [],
+        frontend: [],
+        fullstack: [],
+        game: [],
+        design: [],
+        hybrid: [],
       },
-       indexes : {
-        backend : 0,
-        frontend : 0,
-        fullstack : 0,
-        game : 0,
-        design : 0,
-        hybrid : 0
-      }
+      indexes: {
+        backend: 0,
+        frontend: 0,
+        fullstack: 0,
+        game: 0,
+        design: 0,
+        hybrid: 0,
+      },
     };
   },
   components: {
@@ -155,7 +156,7 @@ export default {
         }, 3000);
       }
     },
-      onWaypointOther(waypoint) {
+    onWaypointOther(waypoint) {
       if (waypoint.going == "in") {
         var projectsMain = document
           .getElementsByClassName("projects-main")
@@ -167,13 +168,17 @@ export default {
         }, 3000);
       }
     },
-    randomIntFromInterval(min, max) { // min and max included 
+    randomIntFromInterval(min, max) {
+      // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
-    selectIndex( length, type){
+    selectIndex(length, type) {
       var random = this.randomIntFromInterval(0, length - 1);
       this.indexes[type] = random;
     },
+    openUrl(url){
+       window.open(url,'_self');
+    }
   },
 };
 </script>
@@ -224,6 +229,45 @@ export default {
   gap: 1rem 1rem;
 }
 
+.main-button {
+  background-color: #55198b;
+  border: solid 1px #55198b;
+  color: white;
+  font-weight: 700;
+  width: max-content;
+  padding: 13px 22px;
+  margin-right: 50px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out 0s;
+}
+.main-button:hover {
+  background-color: #ffffff;
+  color: #55198b;
+  transition: all 0.3s ease 0s;
+  transform: translateY(-3px);
+}
+.project-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.project-button > .main-button {
+  margin-right: 0 !important;
+}
+
+@media (max-width: 320px) {
+  .main-button {
+    font-size: 12px;
+  }
+}
+
 /* Media Query */
 @media (max-width: 1380px) {
   .project-title {
@@ -237,6 +281,12 @@ export default {
   }
   .repo-cards-div-main {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .main-button {
+    font-size: 15px;
+    padding: 12px 18px;
+    margin-right: 0px;
   }
 }
 </style>

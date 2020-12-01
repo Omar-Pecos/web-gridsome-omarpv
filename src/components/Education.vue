@@ -133,13 +133,17 @@ export default {
             }
         },
          styleTechName(type){
-          var color = 'black';
+         var color = 'black';
+
           switch(type){
             case 'backend':
             color = '#C64E4E';
             break;
             case 'frontend':
             color = '#47C163';
+            break;
+            case 'fullstack':
+            color = 'purple';
             break;
             case 'design':
             color = '#808080';

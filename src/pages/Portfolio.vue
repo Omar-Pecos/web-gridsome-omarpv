@@ -5,7 +5,7 @@
        <h1 style="text-align: center" class="project-title">Mi Portfolio</h1>
 
       <!-- Github link -->
-      <p style="text-align: center">
+      <div style="text-align: center">
         <a href="https://github.com/Omar-Pecos" target="_blank">
           <g-image
             width="50"
@@ -13,7 +13,7 @@
             alt="GitHub"
           ></g-image>
         </a>
-      </p>
+      </div>
 
       <!-- Slider -->
      <VueSlickCarousel v-bind="settings">
@@ -92,24 +92,26 @@
               ></path>
             </svg>
             <p class="repo-name" :style=" styleTechName( projectDisplayed.type ) ">{{projectDisplayed.name}}</p>
+            <g-image v-if="projectDisplayed.url" src="~/assets/images/point.png" width="25" style="transform: rotateZ(-90deg);margin-bottom: -5px;margin-left: 5px;" alt="point"></g-image>
+
           </div>
           <p class="repo-description-detail">{{projectDisplayed.description}}</p>
 
-          <p v-if="projectDisplayed.images.length > 0" style="text-align:center;">  
+          <div v-if="projectDisplayed.images.length > 0" style="text-align:center;padding: 10px 0">  
               <span @click="changeImageVisibility( seeingImages )">Ver Imágenes </span>
-          </p>
+          </div>
           <!-- Display Images -->
           <div class="image-div"  v-if="seeingImages">
 
             <span   v-for="image of projectDisplayed.images" v-bind:key="image" class="fitImage">
-              <g-image :src="image" style="height: 150px"></g-image>
+              <g-image :src="image"></g-image>
             </span>
             
           </div>
 
-          <p v-if="projectDisplayed.files.length > 0" style="text-align:center;">  
+          <div v-if="projectDisplayed.files.length > 0" style="text-align:center;padding: 10px 0">  
               <span @click="() => seeingFiles = !seeingFiles">Ver Archivos </span>
-          </p>
+          </div>
            <!-- Display Files -->
           <div class="image-div"  v-if="seeingFiles">
 
@@ -178,6 +180,9 @@ import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
 export default {
+   metaInfo: {
+    title: 'Omar Pecos Portfolio'
+  },
   data(){
     return {
       projectDisplayed : null,
@@ -232,6 +237,9 @@ export default {
             break;
             case 'frontend':
             color = '#47C163';
+            break;
+             case 'fullstack':
+            color = 'purple';
             break;
             case 'design':
             color = '#808080';
@@ -416,19 +424,32 @@ export default {
 
 .fitImage{
   min-width: 150px;
+  min-height: fit-content;
   max-height: 150px;
   overflow: hidden;
 }
 
 .fitImage:hover{
+  max-height: fit-content;
   overflow: visible;
-  transform: scale(1.3);
   position: relative;
+  z-index: 99;
   left: -1vw;
 }
 
+.fitImage img{
+    width: 100%;
+    max-width: 250px; 
+}
+
+.fitImage img:hover{
+  border: 2px solid lightgrey;
+  border-bottom: 5px solid lightgrey;
+  transform: scale(1.3);
+}
+
 @media (min-width : 768px) {
-   .fitImage:hover{
+   .fitImage img:hover{
       transform: scale(2);
   }
 }

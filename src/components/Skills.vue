@@ -13,18 +13,18 @@
         ></g-image>
 
          <div>
-          <p class="subTitle skills-text">
+          <div class="subTitle skills-text">
             <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
             Desarrollar APIs Restful o APIs de GraphQL
-          </p>
-          <p class="subTitle skills-text">
+          </div>
+          <div class="subTitle skills-text">
               <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
             Desarrollar aplicaciones frontend con los frameworks de JavaScript más conocidos (Angular,React,Vue)
-          </p>
-           <p class="subTitle skills-text">
+          </div>
+           <div class="subTitle skills-text">
                <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
             Aplicaciones Full Stack y más
-          </p>
+          </div>
         </div>
 
       </div>
@@ -33,9 +33,7 @@
       <div class="skills-text-div animated">
         <h1 class="skills-heading">{{ "Aptitudes" }}{{ " " }}</h1>
         <p class="subTitle skills-text-subtitle">
-          {{
-            "Desarrollador web que disfruta aprendiendo nuevas tecnologías y poniéndolas en práctica"
-          }}
+          Desarrollador web que disfruta aprendiendo nuevas tecnologías y poniéndolas en práctica
         </p>
 
         
@@ -114,12 +112,16 @@ export default {
         },
          styleTechName(type){
           var color = 'black';
+
           switch(type){
             case 'backend':
             color = '#C64E4E';
             break;
             case 'frontend':
             color = '#47C163';
+            break;
+             case 'fullstack':
+            color = 'purple';
             break;
             case 'design':
             color = '#808080';

@@ -22,15 +22,16 @@
               ></path>
             </svg>
             <p class="repo-name" :style=" styleTechName(project.type) ">{{project.name}}</p>
+            <g-image v-if="project.url" src="~/assets/images/point.png" width="25" style="transform: rotateZ(-90deg);margin-bottom: -5px;margin-left: 5px;" alt="point"></g-image>
           </div>
           <p class="repo-description">{{project.description}}</p>
-          <p v-if="project.images.length > 0" style="text-align:center;">  
+          <div v-if="project.images.length > 0" style="text-align:center;padding: 10px 0">  
               <span @click="changeImageVisibility(seeingImages)">Ver Imágenes </span>
-          </p>
+          </div>
           <div class="image-div"  v-if="seeingImages">
 
             <span   v-for="image of project.images" v-bind:key="image" class="fitImage">
-              <g-image :src="image" style="height: 150px"></g-image>
+              <g-image :src="image" ></g-image>
             </span>
             
           </div>
@@ -70,12 +71,16 @@ export default {
     methods:{
          styleTechName(type){
           var color = 'black';
+
           switch(type){
             case 'backend':
             color = '#C64E4E';
             break;
             case 'frontend':
             color = '#47C163';
+            break;
+             case 'fullstack':
+            color = 'purple';
             break;
             case 'design':
             color = '#808080';
@@ -116,15 +121,28 @@ export default {
 
 .fitImage{
   min-width: 150px;
+  min-height: fit-content;
   max-height: 150px;
   overflow: hidden;
 }
 
 .fitImage:hover{
+  max-height: fit-content;
   overflow: visible;
-  transform: scale(1.3);
   position: relative;
+  z-index: 99;
   left: -1vw;
+}
+
+.fitImage img{
+    width: 100%;
+    max-width: 250px; 
+}
+
+.fitImage img:hover{
+  border: 2px solid lightgrey;
+  border-bottom: 5px solid lightgrey;
+  transform: scale(1.3);
 }
 
 
@@ -183,6 +201,7 @@ export default {
 
 .repo-svg {
   margin-right: 0.5rem;
+  margin-bottom: -5px;
   min-width: 16px;
 }
 
@@ -260,7 +279,7 @@ export default {
         flex-direction: row;
     }*/
 
-    .fitImage:hover{
+    .fitImage img:hover{
       transform: scale(2);
   }
 }

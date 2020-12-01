@@ -3,7 +3,7 @@
     <!-- nav -->
     <header class="header">
       <a
-        href="/"
+        href="https://omarpecos.com/web/"
         class="logo"
         v-bind:style="{ display: [menuDisplay ? 'none' : 'block'] }"
       >
@@ -19,7 +19,6 @@
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label
         class="menu-icon"
-        htmlFor="menu-btn"
         style="color: white"
         v-on:click="displayNav(menuDisplay)"
       >
@@ -27,25 +26,26 @@
       </label>
       <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
         <li>
-          <a href="/#skills">Aptitudes</a>
+          <a :href="webUrl + '/#skills'">Aptitudes</a>
         </li>
         <li>
-          <a href="/#stack">Mi Stack</a>
+          <a :href="webUrl + '/#stack'">Mi Stack</a>
         </li>
         <li>
-          <a href="/#education">Formación</a>
+          <a :href="webUrl + '/#education'">Formación</a>
         </li>
         <li>
-          <a href="/#courses">Cursos</a>
+          <a :href="webUrl + '/#courses'">Cursos</a>
         </li>
         <li>
-          <a href="/#projects">Proyectos</a>
+          <a :href="webUrl + '/#projects'">Proyectos</a>
         </li>
         <li>
-          <g-link to="/portfolio">Portfolio</g-link>
+         <!-- <g-link to="/portfolio/">Portfolio</g-link> -->
+         <a style="cursor:pointer;" @click="openUrl('/web/portfolio/')">Portfolio</a>
         </li>
         <li>
-          <a href="/#contact">Contacto</a>
+          <a :href="webUrl + '/#contact'">Contacto</a>
         </li>
       </ul>
     </header>
@@ -56,6 +56,7 @@
 export default {
   data() {
     return {
+      webUrl : 'https://omarpecos.com/web',
       menuDisplay: false,
     };
   },
@@ -64,6 +65,9 @@ export default {
       var value = !menuDisplay;
       this.menuDisplay = value;
     },
+    openUrl(url){
+       window.open(url,'_self');
+    }
   },
 };
 </script>
@@ -149,7 +153,7 @@ export default {
 
 .header .menu-icon {
   cursor: pointer;
-  display: inline-block;
+ /* display: inline-block;*/
   float: right;
   padding: 28px 20px;
   position: relative;
