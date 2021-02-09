@@ -12,7 +12,7 @@
           src="~/assets/images/developerActivity.svg"
         ></g-image>
 
-         <div>
+         <div style="padding:15px;">
           <div class="subTitle skills-text">
             <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
             Desarrollar APIs Restful o APIs de GraphQL
@@ -78,6 +78,7 @@ query {
 
 <script>
 import _ from 'lodash';
+import {setColorByType} from '../utils';
 
 export default {
     mounted() {
@@ -111,31 +112,8 @@ export default {
             }
         },
          styleTechName(type){
-          var color = 'black';
 
-          switch(type){
-            case 'backend':
-            color = '#C64E4E';
-            break;
-            case 'frontend':
-            color = '#47C163';
-            break;
-             case 'fullstack':
-            color = 'purple';
-            break;
-            case 'design':
-            color = '#808080';
-            break;
-            case 'game':
-            color = 'orange';
-            break;
-            case 'native':
-            color = 'plum';
-            break;
-            case 'hybrid':
-            color = '#3F3FB6';
-            break;
-          }
+          let color = setColorByType(type);
 
             return {
               padding:'2px 5px',
@@ -211,6 +189,7 @@ export default {
 }
 .subTitle {
   color: #868e96;
+  margin: 10px;
 }
 
 /* Software skills */

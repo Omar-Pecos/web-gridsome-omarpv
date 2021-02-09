@@ -1,14 +1,31 @@
+require('dotenv').config();
 const axios = require('axios');
 
 const baseURL = 'https://api-node-portfolio.omarpv.repl.co';
+let myToken;
 
 module.exports = function (api) {
   api.loadSource(async ({ addCollection }) => {
 
+    //get user token
+      var {data} = await axios
+        .post(baseURL + '/api/auth/login',
+        {
+          email: 'o@o.com',
+          password : process.env.MY_ACCOUNT_PASS
+        })
+      
+      myToken = data.data.token;
+
      const techsCollection = addCollection('Tech');
 
      /* get Techs */
-      var {data} = await axios.get( baseURL + '/api/techs');
+      var {data} = await axios
+        .get( baseURL + '/api/techs', {
+          headers: {
+            'Authorization': myToken
+          }
+        });
       const techData = data.data;
 
       for ( const tech of techData ){
@@ -23,7 +40,11 @@ module.exports = function (api) {
       const profileCollection = addCollection('Profile');
 
       /* get Profile */
-      var {data} = await axios.get( baseURL + '/api/profile');
+      var {data} = await axios.get( baseURL + '/api/profile', {
+        headers: {
+          'Authorization': myToken
+        }
+      });
       const profileData = data.data;
 
       profileCollection.addNode({
@@ -37,7 +58,11 @@ module.exports = function (api) {
       const coursesCollection = addCollection('Course');
 
       /* get Courses */
-        var {data} = await axios.get( baseURL + '/api/courses');
+        var {data} = await axios.get( baseURL + '/api/courses', {
+          headers: {
+            'Authorization': myToken
+          }
+        });
         const courseData = data.data;
   
         for ( const course of courseData ){
@@ -56,8 +81,12 @@ module.exports = function (api) {
 
         const projectsCollection = addCollection('Project');
 
-        /* get Courses */
-          var {data} = await axios.get( baseURL + '/api/projects');
+        /* get Projects */
+          var {data} = await axios.get( baseURL + '/api/projects', {
+            headers: {
+              'Authorization': myToken
+            }
+          });
           const projectData = data.data;
     
           for ( const project of projectData ){
@@ -69,6 +98,7 @@ module.exports = function (api) {
                 images : project.images,
                 files : project.files,
                 url : project.url,
+                repo_url : project.repo_url,
                 techs : project.techs,
                 pinned : project.pinned,
             })

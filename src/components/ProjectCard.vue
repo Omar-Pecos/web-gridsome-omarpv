@@ -53,6 +53,11 @@
             </div>
             <div class="repo-right-stat">
               <span>{{project.type.toUpperCase()}}</span>
+              <span v-if="project.repo_url">
+                <a :href="project.repo_url" target="_blank">
+                  <g-image src="~/assets/images/github.png"  width="50" ></g-image>
+                </a> 
+              </span>
             </div>
           </div>
         </div>
@@ -60,6 +65,7 @@
 </template>
 
 <script>
+import {setColorByType} from '../utils';
 
 export default {
     props : ['project'],
@@ -69,36 +75,13 @@ export default {
       }
     },
     methods:{
-         styleTechName(type){
-          var color = 'black';
+      styleTechName(type){
+      
+        let color = setColorByType(type);
 
-          switch(type){
-            case 'backend':
-            color = '#C64E4E';
-            break;
-            case 'frontend':
-            color = '#47C163';
-            break;
-             case 'fullstack':
-            color = 'purple';
-            break;
-            case 'design':
-            color = '#808080';
-            break;
-            case 'game':
-            color = 'orange';
-            break;
-            case 'native':
-            color = 'plum';
-            break;
-            case 'hybrid':
-            color = '#3F3FB6';
-            break;
-          }
-
-            return {
-              color
-            }
+        return {
+          color
+        }
       },
       openRepoinNewTab( url ){
           if (url)
@@ -176,7 +159,8 @@ export default {
 
 .repo-right-stat {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .language-color {
@@ -221,13 +205,17 @@ export default {
 }
 
 .repo-description {
-  overflow: hidden;
-   display: block;
- /* display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;*/
+ display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 
+.repo-description:hover{
+  display: block;
+  overflow: visible;
+}
 
 .dark-card-mode {
   background-color: #171c28 !important;

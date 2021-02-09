@@ -102,6 +102,8 @@ query {
 </static-query>
 
 <script>
+import {setColorByType} from '../utils';
+
 export default {
     data(){
         return{
@@ -133,37 +135,14 @@ export default {
             }
         },
          styleTechName(type){
-         var color = 'black';
 
-          switch(type){
-            case 'backend':
-            color = '#C64E4E';
-            break;
-            case 'frontend':
-            color = '#47C163';
-            break;
-            case 'fullstack':
-            color = 'purple';
-            break;
-            case 'design':
-            color = '#808080';
-            break;
-            case 'game':
-            color = 'orange';
-            break;
-            case 'native':
-            color = 'plum';
-            break;
-            case 'hybrid':
-            color = '#3F3FB6';
-            break;
+          let color = setColorByType(type);   
+
+          return {
+            padding:'2px 5px',
+            border : '2px solid '+ color,
+            borderRadius:'30px'
           }
-
-            return {
-              padding:'2px 5px',
-              border : '2px solid '+ color,
-              borderRadius:'30px'
-            }
       }
     }
 };

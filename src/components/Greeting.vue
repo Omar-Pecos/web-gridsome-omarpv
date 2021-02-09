@@ -1,5 +1,5 @@
 <template>
-  <div class="greet-main animated fadeInBottom" id="greeting" >
+  <div class="greet-main animated fadeInBottom" id="greeting">
     <div class="greeting-main">
       <div class="greeting-text-div">
         <div>
@@ -8,7 +8,6 @@
             {{ "Hola, soy Omar Pecos" }}{{ " " }}
             <span class="wave-emoji">
               <g-image
-                width="25"
                 alt="Hello!"
                 src="~/assets/images/emoji_hello.png"
               ></g-image>
@@ -39,13 +38,28 @@
               </a>
             </div>
             <div>
-                <a href="https://www.linkedin.com/in/omar-pecos-vales-659b741aa/" target="_blank">
-                    <g-image
-                        width="50"
-                        src="~/assets/images/linkedin.png"
-                        alt="Linkedin"
-                    ></g-image>
-                </a>
+              <a
+                href="https://www.linkedin.com/in/omar-pecos-vales-659b741aa/"
+                target="_blank"
+              >
+                <g-image
+                  width="50"
+                  src="~/assets/images/linkedin.png"
+                  alt="Linkedin"
+                ></g-image>
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://play.google.com/store/apps/dev?id=5005668078866662058"
+                target="_blank"
+              >
+                <g-image
+                  width="200"
+                  src="~/assets/images/google-play-badge.png"
+                  alt="GooglePlayStore"
+                ></g-image>
+              </a>
             </div>
           </div>
 
@@ -103,7 +117,7 @@ export default {
     transform: translateY(0);
   }
 }
-.fadeInBottom{
+.fadeInBottom {
   -webkit-animation-name: fadeInBottom;
   animation-name: fadeInBottom;
 }
@@ -112,6 +126,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
   color: white;
 }
 
@@ -152,7 +167,6 @@ export default {
 }
 .button-greeting-div {
   display: flex;
-  margin-top: 20px;
 }
 
 .greeting-text {
@@ -171,11 +185,19 @@ export default {
   height: auto;
 }
 .wave-emoji {
+  position: relative;
+  top: 0.7vw;
+  width: 50px;
+  height: 50px;
   animation-duration: 1.8s;
   animation-iteration-count: infinite;
   animation-name: wave;
   display: inline-block;
   transform-origin: 70% 70%;
+}
+
+.wave-emoji img {
+  width: 100%;
 }
 
 @keyframes wave {
@@ -211,6 +233,7 @@ export default {
     font-size: 20px;
   }
 }
+
 @media (max-width: 768px) {
   .button-greeting-div {
     justify-content: space-around;
@@ -230,6 +253,11 @@ export default {
 
   .flexdiv {
     justify-content: center;
+  }
+  .wave-emoji {
+    width: 35px;
+    height: 35px;
+    top: 1.3vw;
   }
 }
 </style>

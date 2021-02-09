@@ -40,9 +40,10 @@
       </div>
        
        <div class="skills-bar" v-if="profile">
-           <span id="imgSvg" style="text-align: center;" >
+          <!-- <span id="imgSvg" style="text-align: center;" >
                 <g-image alt="Skills" src="~/assets/images/skill.svg" style="width : 20vh; margin-left: -50px;"></g-image>
-           </span>
+           </span> -->
+           <div class="displayOnBig"></div>
 
             <div
           class="skill"
@@ -89,6 +90,7 @@ query {
 
 <script>
 import _ from "lodash";
+import {setColorByType} from '../utils';
 
 export default {
   mounted() {
@@ -122,35 +124,8 @@ export default {
                 }, 3000);
         }
     },
-    getColor(type){
-        var color = 'black';
-        switch(type){
-            case 'backend':
-            color = '#C64E4E';
-            break;
-            case 'frontend':
-            color = '#47C163';
-            break;
-             case 'fullstack':
-            color = 'purple';
-            break;
-            case 'design':
-            color = '#808080';
-            break;
-            case 'game':
-            color = 'orange';
-            break;
-            case 'native':
-            color = 'plum';
-            break;
-            case 'hybrid':
-            color = '#3F3FB6';
-            break;
-        }
-        return color;
-    },
     setWidth(type,percentage) {
-     var color = this.getColor(type);
+     let color = setColorByType(type);
       var width = percentage + "%";
       return {
         width,
@@ -158,7 +133,7 @@ export default {
       };
     },
      styleTechName(type){
-          var color = this.getColor(type);
+          let color = setColorByType(type);
          
             return {
               padding:'2px 5px',
@@ -198,6 +173,7 @@ export default {
 
 .meter {
   height: 20px;
+  margin-top: 1vw;
   position: relative;
   width: 80%;
   background: rgb(243, 239, 239);
@@ -217,10 +193,6 @@ export default {
   overflow: hidden;
 }
 
-.skill{
-  line-height: 6vh;
-}
-
 .skill-bars {
   font-size: 28px;
   width: 40%;
@@ -234,7 +206,6 @@ export default {
 }
 .skills-container > * {
   flex: 1;
-  margin-bottom: 30px;
 }
 
 .skills-image > img {
@@ -247,20 +218,23 @@ export default {
       line-height: 3rem;
   }
 
+  .skill {
+    margin: 20px;
+  }
+
+.displayOnBig{
+    display: block;
+    width: 100%;
+    height: 12vw;
+  }
+
 /* Media Query */
 
 @media (max-width: 1456px) {
-  .skills-bar {
-    line-height: 4rem;
-  }
   .skills-image{
     display: none;
     order: 2;
   }
-
-  #imgSvg{
-    display: block;
-}
 
   .meter{
       width: 80%;
@@ -271,18 +245,18 @@ export default {
   .skills-container {
     flex-direction: column;
   }
-  .skills-bar {
-    line-height: 3rem;
-    margin: 0px 20px;
-  }
+
   .skills-image,#imgSvg {
     display: none;
     order: 2;
   }
   .meter{
       width: inherit;
+      margin-top: 2.5vw;
   }
-
+  .displayOnBig{
+    display: none;
+  }
 
 }
 </style>

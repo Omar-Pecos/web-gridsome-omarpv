@@ -20,11 +20,10 @@
         href="#otherprojects"
       />
 
-     <div class="project-button">
-       <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button"  @click="openUrl('/web/portfolio/')" >Portfolio</a>
+      <div class="project-button">
+        <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
+        <a class="main-button" @click="openUrl('/portfolio/')">Portfolio</a>
       </div>
-
     </div>
 
     <div class="projects-main animated">
@@ -61,10 +60,9 @@
       </div>
 
       <div class="project-button">
-         <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-         <a class="main-button"  @click="openUrl('/web/portfolio/')" >Portfolio</a>
+        <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
+        <a class="main-button" @click="openUrl('/portfolio/')">Portfolio</a>
       </div>
-
     </div>
   </div>
 </template>
@@ -79,6 +77,7 @@ query {
         type
         description
         url
+        repo_url
         techs{
           _id
           name
@@ -176,9 +175,9 @@ export default {
       var random = this.randomIntFromInterval(0, length - 1);
       this.indexes[type] = random;
     },
-    openUrl(url){
-       window.open(url,'_self');
-    }
+    openUrl(url) {
+      window.open(url, "_self");
+    },
   },
 };
 </script>

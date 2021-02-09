@@ -3,7 +3,7 @@
     <!-- nav -->
     <header class="header">
       <a
-        href="https://omarpecos.com/web/"
+        href="/"
         class="logo"
         v-bind:style="{ display: [menuDisplay ? 'none' : 'block'] }"
       >
@@ -26,26 +26,28 @@
       </label>
       <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
         <li>
-          <a :href="webUrl + '/#skills'">Aptitudes</a>
+          <a href="/#skills">Aptitudes</a>
         </li>
         <li>
-          <a :href="webUrl + '/#stack'">Mi Stack</a>
+          <a href="/#stack">Mi Stack</a>
         </li>
         <li>
-          <a :href="webUrl + '/#education'">Formación</a>
+          <a href="/#education">Formación</a>
         </li>
         <li>
-          <a :href="webUrl + '/#courses'">Cursos</a>
+          <a href="/#courses">Cursos</a>
         </li>
         <li>
-          <a :href="webUrl + '/#projects'">Proyectos</a>
+          <a href="/#projects">Proyectos</a>
         </li>
         <li>
-         <!-- <g-link to="/portfolio/">Portfolio</g-link> -->
-         <a style="cursor:pointer;" @click="openUrl('/web/portfolio/')">Portfolio</a>
+          <!-- <g-link to="/portfolio/">Portfolio</g-link> -->
+          <a style="cursor:pointer;" @click="openUrl('/portfolio/')"
+            >Portfolio</a
+          >
         </li>
         <li>
-          <a :href="webUrl + '/#contact'">Contacto</a>
+          <a href="/#contact">Contacto</a>
         </li>
       </ul>
     </header>
@@ -56,7 +58,7 @@
 export default {
   data() {
     return {
-      webUrl : 'https://omarpecos.com/web',
+      //webUrl : 'https://omarpecos.com/web',
       menuDisplay: false,
     };
   },
@@ -65,9 +67,9 @@ export default {
       var value = !menuDisplay;
       this.menuDisplay = value;
     },
-    openUrl(url){
-       window.open(url,'_self');
-    }
+    openUrl(url) {
+      window.open(url, "_self");
+    },
   },
 };
 </script>
@@ -75,10 +77,10 @@ export default {
 <style>
 /* header */
 
-.showContent{
+.showContent {
   display: contents;
 }
-.block{
+.block {
   display: block;
 }
 
@@ -153,7 +155,7 @@ export default {
 
 .header .menu-icon {
   cursor: pointer;
- /* display: inline-block;*/
+  /* display: inline-block;*/
   float: right;
   padding: 28px 20px;
   position: relative;
@@ -226,9 +228,9 @@ export default {
   top: 0;
 }
 
-#omarpv-logo{
-    width: 50px !important;
-  }
+#omarpv-logo {
+  width: 50px !important;
+}
 /* 48em = 768px */
 
 @media (min-width: 48em) {
@@ -247,7 +249,7 @@ export default {
     display: none;
   }
 
-  #omarpv-logo{
+  #omarpv-logo {
     width: 100px !important;
   }
 }
@@ -256,7 +258,7 @@ export default {
     font-size: 12px;
   }
 
-  #omarpv-logo{
+  #omarpv-logo {
     width: 50px !important;
   }
 }

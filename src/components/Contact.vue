@@ -5,7 +5,7 @@
     <div class="contact-div-main">
       <div class="contact-header">
         <h1 class="heading contact-title">Omar Pecos</h1>
-        <p class="subTitle contact-subtitle">Desarrollador Full Stack</p>
+        <p class="contact-subtitle">Desarrollador Full Stack</p>
 
         <span class="location">
           <svg
@@ -31,8 +31,18 @@
             omarpecos@gmail.com
           </a>
 
-          <br />
-          <br />
+          <div class="separator"></div>
+
+          <a
+            href="https://play.google.com/store/apps/dev?id=5005668078866662058"
+            target="_blank"
+          >
+            <g-image
+              width="200"
+              src="~/assets/images/google-play-badge.png"
+              alt="GooglePlayStore"
+            ></g-image>
+          </a>
 
           <!-- Social media  -->
           <div class="flexdiv">
@@ -120,8 +130,8 @@ export default {
   animation-name: fadeInBottom;
 }
 
-.location{
-    text-align: center;
+.location {
+  text-align: center;
 }
 
 .main {
@@ -135,10 +145,10 @@ export default {
   display: flex;
 }
 
-.contact-header{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .flexdiv {
@@ -177,6 +187,7 @@ export default {
 
 .contact-subtitle {
   text-transform: uppercase;
+  color: #868e96;
 }
 
 .contact-text-div {
@@ -192,6 +203,10 @@ export default {
   height: auto;
   margin-left: 1.5rem;
   margin-top: -4rem;
+}
+
+.separator {
+  height: 2vw;
 }
 
 /* Media Query */
@@ -227,13 +242,13 @@ export default {
     display: none;
   }
 }
-@media (min-width : 1380px) {
- .flexdiv{
-     justify-content: flex-start;
- }
+@media (min-width: 1380px) {
+  .flexdiv {
+    justify-content: flex-start;
+  }
 
- .location{
+  .location {
     text-align: left;
-}
+  }
 }
 </style>
