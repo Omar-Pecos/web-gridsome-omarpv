@@ -26,28 +26,28 @@
       </label>
       <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
         <li>
-          <a href="/#skills">Aptitudes</a>
+          <a :href="webUrl + '/#skills'">Aptitudes</a>
         </li>
         <li>
-          <a href="/#stack">Mi Stack</a>
+          <a :href="webUrl + '/#stack'">Mi Stack</a>
         </li>
         <li>
-          <a href="/#education">Formación</a>
+          <a :href="webUrl + '/#education'">Formación</a>
         </li>
         <li>
-          <a href="/#courses">Cursos</a>
+          <a :href="webUrl + '/#courses'">Cursos</a>
         </li>
         <li>
-          <a href="/#projects">Proyectos</a>
+          <a :href="webUrl + '/#projects'">Proyectos</a>
         </li>
         <li>
           <!-- <g-link to="/portfolio/">Portfolio</g-link> -->
-          <a style="cursor:pointer;" @click="openUrl('/portfolio/')"
+          <a style="cursor:pointer;" @click="openUrl('/web/portfolio/')"
             >Portfolio</a
           >
         </li>
         <li>
-          <a href="/#contact">Contacto</a>
+          <a :href="webUrl + '/#contact'">Contacto</a>
         </li>
       </ul>
     </header>
@@ -58,7 +58,7 @@
 export default {
   data() {
     return {
-      //webUrl : 'https://omarpecos.com/web',
+      webUrl: "https://omarpecos.com/web",
       menuDisplay: false,
     };
   },

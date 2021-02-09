@@ -22,7 +22,7 @@
 
       <div class="project-button">
         <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button" @click="openUrl('/portfolio/')">Portfolio</a>
+        <a class="main-button" @click="openUrl('/web/portfolio/')">Portfolio</a>
       </div>
     </div>
 
@@ -61,7 +61,7 @@
 
       <div class="project-button">
         <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button" @click="openUrl('/portfolio/')">Portfolio</a>
+        <a class="main-button" @click="openUrl('/web/portfolio/')">Portfolio</a>
       </div>
     </div>
   </div>
