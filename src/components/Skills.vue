@@ -1,9 +1,8 @@
 <template>
-  <div class="main" >
-
+  <div class="main">
     <!-- Ancla -->
-      <div id="skills" v-waypoint="{ active: true, callback: onWaypoint}"></div>
-  
+    <div id="skills" v-waypoint="{ active: true, callback: onWaypoint }"></div>
+
     <div class="skills-main-div">
       <!-- Transition left -->
       <div class="skills-image-div animated">
@@ -12,43 +11,62 @@
           src="~/assets/images/developerActivity.svg"
         ></g-image>
 
-         <div style="padding:15px;">
+        <div style="padding:15px;">
           <div class="subTitle skills-text">
-            <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
+            <g-image
+              src="~/assets/images/point.png"
+              width="25"
+              style="transform: rotateZ(90deg);margin-bottom: -7px;"
+              alt="point"
+            ></g-image>
             Desarrollar APIs Restful o APIs de GraphQL
           </div>
           <div class="subTitle skills-text">
-              <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
-            Desarrollar aplicaciones frontend con los frameworks de JavaScript más conocidos (Angular,React,Vue)
+            <g-image
+              src="~/assets/images/point.png"
+              width="25"
+              style="transform: rotateZ(90deg);margin-bottom: -7px;"
+              alt="point"
+            ></g-image>
+            Desarrollar aplicaciones frontend con los frameworks de JavaScript
+            más conocidos (Angular,React,Vue)
           </div>
-           <div class="subTitle skills-text">
-               <g-image src="~/assets/images/point.png" width="25" style="transform: rotateZ(90deg);margin-bottom: -7px;" alt="point"></g-image>
+          <div class="subTitle skills-text">
+            <g-image
+              src="~/assets/images/point.png"
+              width="25"
+              style="transform: rotateZ(90deg);margin-bottom: -7px;"
+              alt="point"
+            ></g-image>
             Aplicaciones Full Stack y más
           </div>
         </div>
-
       </div>
 
       <!-- Transition right -->
       <div class="skills-text-div animated">
         <h1 class="skills-heading">{{ "Aptitudes" }}{{ " " }}</h1>
         <p class="subTitle skills-text-subtitle">
-          Desarrollador web que disfruta aprendiendo nuevas tecnologías y poniéndolas en práctica
+          Desarrollador web que disfruta aprendiendo nuevas tecnologías y
+          poniéndolas en práctica
         </p>
 
-        
-                <div>
-                    <div class="software-skills-main-div">
-                        <ul class="dev-icons" v-if="profile">
-                       
-                            <li class="software-skill-inline" v-for="skill in profile.about.skills"  v-bind:key="skill._id">
-                                <img width="30" :src="skill.tech.icon" :alt="skill.tech.name">
-                                <p :style=" styleTechName(skill.tech.type) ">{{skill.tech.name}}</p>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                </div>
+        <div>
+          <div class="software-skills-main-div">
+            <ul class="dev-icons" v-if="profile">
+              <li
+                class="software-skill-inline"
+                v-for="skill in profile.about.skills"
+                v-bind:key="skill._id"
+              >
+                <img width="30" :src="skill.tech.icon" :alt="skill.tech.name" />
+                <p :style="styleTechName(skill.tech.type)">
+                  {{ skill.tech.name }}
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -77,52 +95,56 @@ query {
 </static-query>
 
 <script>
-import _ from 'lodash';
-import {setColorByType} from '../utils';
+import _ from "lodash";
+import { setColorByType } from "../utils";
 
 export default {
-    mounted() {
-      this.profile = this.$static.profile.edges[0].node;
-       var skills = this.profile.about.skills;
+  mounted() {
+    this.profile = this.$static.profile.edges[0].node;
+    var skills = this.profile.about.skills;
     //sortBy
-     var newSkills =  _.sortBy(skills,['tech.type']);
-     
-     this.profile.about.skills = newSkills;
-      
-    },
-    data(){
-        return{
-            active : true,
-            profile : null
-        }
-    },
-    methods : {
-        onWaypoint(waypoint){
-            if (waypoint.going == 'in'){
-                var skillsImageDiv = document.getElementsByClassName('skills-image-div').item(0);
-                skillsImageDiv.classList.add("fadeInLeft");
+    var newSkills = _.sortBy(skills, ["tech.type"]);
 
-                var skillsTextDiv = document.getElementsByClassName('skills-text-div').item(0);
-                skillsTextDiv.classList.add("fadeInRight");
+    this.profile.about.skills = newSkills;
+  },
+  data() {
+    return {
+      active: true,
+      profile: null,
+    };
+  },
+  methods: {
+    onWaypoint(waypoint) {
+      if (waypoint.going == "in") {
+        var skillsImageDiv = document
+          .getElementsByClassName("skills-image-div")
+          .item(0);
+        skillsImageDiv.classList.add("fadeInLeft");
 
-                 setTimeout(() =>{
-                    skillsImageDiv.classList.remove("fadeInLeft");
-                    skillsTextDiv.classList.remove("fadeInRight");
-                }, 3000);
-            }
-        },
-         styleTechName(type){
+        var skillsTextDiv = document
+          .getElementsByClassName("skills-text-div")
+          .item(0);
+        skillsTextDiv.classList.add("fadeInRight");
 
-          let color = setColorByType(type);
-
-            return {
-              padding:'2px 5px',
-              border : '2px solid '+ color,
-              borderRadius:'30px'
-            }
+        setTimeout(() => {
+          skillsImageDiv.classList.remove("fadeInLeft");
+          skillsTextDiv.classList.remove("fadeInRight");
+        }, 3000);
       }
-    }
-}
+    },
+    styleTechName(type) {
+      let color = setColorByType(type);
+
+      return {
+        padding: "2px 5px",
+        backgroundColor: color,
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "30px",
+      };
+    },
+  },
+};
 </script>
 
 <style>
@@ -159,11 +181,10 @@ export default {
   -webkit-animation-name: fadeInLeft;
   animation-name: fadeInLeft;
 }
-.fadeInRight{
--webkit-animation-name: fadeInRight;
+.fadeInRight {
+  -webkit-animation-name: fadeInRight;
   animation-name: fadeInRight;
 }
-
 
 .skills-main-div {
   display: flex;
@@ -220,7 +241,7 @@ export default {
   color: #868e96;
   font-size: 10px;
 }
-.software-skill-inline > i:hover ~ p{
+.software-skill-inline > i:hover ~ p {
   color: #645beb;
 }
 

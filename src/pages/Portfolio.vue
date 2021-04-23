@@ -1,8 +1,12 @@
 <template>
   <Layout>
     <div class="main">
-      <h1 style="text-align: center" class="project-title">Mi Portfolio</h1>
-
+      <h1
+        style="text-align: center; margin-bottom: 10px;"
+        class="project-title"
+      >
+        Mi Portfolio
+      </h1>
       <!-- Github link -->
       <div style="text-align: center">
         <a href="https://github.com/Omar-Pecos" target="_blank">
@@ -14,9 +18,29 @@
         </a>
       </div>
 
+      <div class="types">
+        <span
+          style="font-weight:bold;margin-right:10px;"
+          :class="{ typeActive: typeSearched === 'ALL' }"
+          @click="() => (typeSearched = 'ALL')"
+          >ALL TYPES</span
+        >
+        <span
+          v-for="type of TYPES"
+          :key="type"
+          :style="styleTechName(type, 'type')"
+          :class="{ typeActive: typeSearched === type }"
+          @click="() => (typeSearched = type)"
+          >{{ type.toUpperCase() }}</span
+        >
+      </div>
+
       <!-- Slider -->
       <VueSlickCarousel v-bind="settings">
-        <div v-for="project of $page.projects.edges" :key="project.node.id">
+        <div
+          v-for="project of getProjectsByType(typeSearched)"
+          :key="project.node.id"
+        >
           <div>
             <div
               class="repo-card-div"
@@ -36,7 +60,10 @@
                     d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
                   ></path>
                 </svg>
-                <p class="repo-name" :style="styleTechName(project.node.type)">
+                <p
+                  class="repo-name"
+                  :style="styleTechName(project.node.type, 'title')"
+                >
                   {{ project.node.name }}
                 </p>
               </div>
@@ -56,7 +83,7 @@
                           v-bind:key="tech._id"
                         >
                           <img width="30" :src="tech.icon" :alt="tech.name" />
-                          <p :style="styleTechName(tech.type)">
+                          <p :style="styleTechName(tech.type, 'badge')">
                             {{ tech.name }}
                           </p>
                         </li>
@@ -93,7 +120,10 @@
                 d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
               ></path>
             </svg>
-            <p class="repo-name" :style="styleTechName(projectDisplayed.type)">
+            <p
+              class="repo-name"
+              :style="styleTechName(projectDisplayed.type, 'title')"
+            >
               {{ projectDisplayed.name }}
             </p>
             <g-image
@@ -159,7 +189,9 @@
                       v-bind:key="tech._id"
                     >
                       <img width="30" :src="tech.icon" :alt="tech.name" />
-                      <p :style="styleTechName(tech.type)">{{ tech.name }}</p>
+                      <p :style="styleTechName(tech.type, 'badge')">
+                        {{ tech.name }}
+                      </p>
                     </li>
                   </ul>
                 </div>
@@ -214,7 +246,7 @@ import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
-import { setColorByType } from "../utils";
+import { setColorByType, TYPES } from "../utils";
 
 export default {
   metaInfo: {
@@ -223,6 +255,8 @@ export default {
   data() {
     return {
       projectDisplayed: null,
+      typeSearched: "ALL",
+      TYPES,
       seeingImages: false,
       seeingFiles: false,
       settings: {
@@ -265,19 +299,51 @@ export default {
   components: {
     VueSlickCarousel,
   },
+  mounted() {
+    // WIP - no native projects at this time so erasing from filtering (error with Slider)
+    this.TYPES = this.TYPES.filter((type) => type !== "native");
+  },
   methods: {
-    styleTechName(type) {
+    styleTechName(type, node) {
       let color = setColorByType(type);
+      let style = { color };
 
-      return {
-        color,
-      };
+      switch (node) {
+        case "type":
+          style = {
+            ...style,
+            fontWeight: "bold",
+          };
+          break;
+        case "badge":
+          style = {
+            padding: "2px 5px",
+            backgroundColor: color,
+            color: "white",
+            fontWeight: "bold",
+            borderRadius: "30px",
+          };
+          break;
+      }
+
+      return style;
     },
     openRepoinNewTab(url) {
       if (url) window.open(url, "_blank");
     },
     changeImageVisibility(value) {
       this.seeingImages = !value;
+    },
+    getProjectsByType(type) {
+      let projects = null;
+      if (type === "ALL") {
+        projects = this.$page.projects.edges;
+      } else {
+        projects = this.$page.projects.edges.filter(
+          (edge) => edge.node.type === type
+        );
+      }
+      return projects;
     },
   },
 };
@@ -463,6 +529,24 @@ export default {
   border: 2px solid lightgrey;
   border-bottom: 5px solid lightgrey;
   transform: scale(1.3);
+}
+
+.types {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.types > span {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.typeActive {
+  text-decoration: overline;
 }
 
 @media (min-width: 768px) {

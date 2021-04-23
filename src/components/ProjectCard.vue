@@ -1,115 +1,129 @@
 <template>
   <div v-if="project">
-        <div
-          class="repo-card-div"
-          :key="project.id"
+    <div class="repo-card-div" :key="project.id">
+      <div class="repo-name-div" @click="openRepoinNewTab(project.url)">
+        <svg
+          aria-hidden="true"
+          height="20"
+          role="img"
+          viewBox="0 0 12 16"
+          width="14"
+          class="repo-svg"
         >
-          <div 
-            class="repo-name-div"
-            @click="openRepoinNewTab(project.url)"
-           >
-            <svg
-              aria-hidden="true"
-              height="20"
-              role="img"
-              viewBox="0 0 12 16"
-              width="14"
-              class="repo-svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
-              ></path>
-            </svg>
-            <p class="repo-name" :style=" styleTechName(project.type) ">{{project.name}}</p>
-            <g-image v-if="project.url" src="~/assets/images/point.png" width="25" style="transform: rotateZ(-90deg);margin-bottom: -5px;margin-left: 5px;" alt="point"></g-image>
-          </div>
-          <p class="repo-description">{{project.description}}</p>
-          <div v-if="project.images.length > 0" style="text-align:center;padding: 10px 0">  
-              <span @click="changeImageVisibility(seeingImages)">Ver Imágenes </span>
-          </div>
-          <div class="image-div"  v-if="seeingImages">
-
-            <span   v-for="image of project.images" v-bind:key="image" class="fitImage">
-              <g-image :src="image" ></g-image>
-            </span>
-            
-          </div>
-          <div class="repo-stats">
-            <div class="repo-left-stat">
-                 <!-- Techs display -->
-                <div>
-                    <div class="software-skills-main-div">
-                        <ul class="dev-icons">
-                       
-                            <li class="software-skill-inline" v-for="tech in project.techs"  v-bind:key="tech._id">
-                                <img width="30" :src="tech.icon" :alt="tech.name">
-                                <p :style=" styleTechName(tech.type) ">{{tech.name}}</p>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="repo-right-stat">
-              <span>{{project.type.toUpperCase()}}</span>
-              <span v-if="project.repo_url">
-                <a :href="project.repo_url" target="_blank">
-                  <g-image src="~/assets/images/github.png"  width="50" ></g-image>
-                </a> 
-              </span>
+          <path
+            fill-rule="evenodd"
+            d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
+          ></path>
+        </svg>
+        <p class="repo-name" :style="styleTechName(project.type, 'name')">
+          {{ project.name }}
+        </p>
+        <g-image
+          v-if="project.url"
+          src="~/assets/images/point.png"
+          width="25"
+          style="transform: rotateZ(-90deg);margin-bottom: -5px;margin-left: 5px;"
+          alt="point"
+        ></g-image>
+      </div>
+      <p class="repo-description">{{ project.description }}</p>
+      <div
+        v-if="project.images.length > 0"
+        style="text-align:center;padding: 10px 0"
+      >
+        <span @click="changeImageVisibility(seeingImages)">Ver Imágenes </span>
+      </div>
+      <div class="image-div" v-if="seeingImages">
+        <span
+          v-for="image of project.images"
+          v-bind:key="image"
+          class="fitImage"
+        >
+          <g-image :src="image"></g-image>
+        </span>
+      </div>
+      <div class="repo-stats">
+        <div class="repo-left-stat">
+          <!-- Techs display -->
+          <div>
+            <div class="software-skills-main-div">
+              <ul class="dev-icons">
+                <li
+                  class="software-skill-inline"
+                  v-for="tech in project.techs"
+                  v-bind:key="tech._id"
+                >
+                  <img width="30" :src="tech.icon" :alt="tech.name" />
+                  <p :style="styleTechName(tech.type, 'badge')">
+                    {{ tech.name }}
+                  </p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+        <div class="repo-right-stat">
+          <span>{{ project.type.toUpperCase() }}</span>
+          <span v-if="project.repo_url">
+            <a :href="project.repo_url" target="_blank">
+              <g-image src="~/assets/images/github.png" width="50"></g-image>
+            </a>
+          </span>
+        </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import {setColorByType} from '../utils';
+import { setColorByType } from "../utils";
 
 export default {
-    props : ['project'],
-    data(){
-      return{
-         seeingImages : false
-      }
+  props: ["project"],
+  data() {
+    return {
+      seeingImages: false,
+    };
+  },
+  methods: {
+    styleTechName(type, node) {
+      let color = setColorByType(type);
+      return node === "name"
+        ? { color }
+        : {
+            padding: "2px 5px",
+            backgroundColor: color,
+            color: "white",
+            fontWeight: "bold",
+            borderRadius: "30px",
+          };
     },
-    methods:{
-      styleTechName(type){
-      
-        let color = setColorByType(type);
-
-        return {
-          color
-        }
-      },
-      openRepoinNewTab( url ){
-          if (url)
-            window.open(url,'_blank');
-      },
-      changeImageVisibility( value ){
-        this.seeingImages = !value;
-      }
-    }
-}
+    openRepoinNewTab(url) {
+      if (url) window.open(url, "_blank");
+    },
+    changeImageVisibility(value) {
+      this.seeingImages = !value;
+    },
+  },
+};
 </script>
 
 <style>
-.image-div{
-  display:flex;
-  flex-direction:row;
+.image-div {
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center
+  justify-content: center;
 }
 
-.fitImage{
+.fitImage {
   min-width: 150px;
   min-height: fit-content;
   max-height: 150px;
   overflow: hidden;
 }
 
-.fitImage:hover{
+.fitImage:hover {
   max-height: fit-content;
   overflow: visible;
   position: relative;
@@ -117,17 +131,16 @@ export default {
   left: -1vw;
 }
 
-.fitImage img{
-    width: 100%;
-    max-width: 250px; 
+.fitImage img {
+  width: 100%;
+  max-width: 250px;
 }
 
-.fitImage img:hover{
+.fitImage img:hover {
   border: 2px solid lightgrey;
   border-bottom: 5px solid lightgrey;
   transform: scale(1.3);
 }
-
 
 .repo-card-div {
   color: rgb(88, 96, 105);
@@ -146,7 +159,7 @@ export default {
   justify-content: space-between;
 
   flex-direction: column;
-  
+
   font-size: 13px;
   color: rgb(106, 115, 125);
 }
@@ -205,24 +218,24 @@ export default {
 }
 
 .repo-description {
- display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-overflow: hidden;
-text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.repo-description:hover{
+.repo-description:hover {
   display: block;
   overflow: visible;
 }
 
 .dark-card-mode {
   background-color: #171c28 !important;
-  color:white;
+  color: white;
 }
 .dark-card-mode p {
-  color:white;
+  color: white;
 }
 .dark-card-mode:hover {
   background-color: #55198b !important;
@@ -255,20 +268,19 @@ text-overflow: ellipsis;
   color: #868e96;
   font-size: 10px;
 }
-.software-skill-inline > i:hover ~ p{
+.software-skill-inline > i:hover ~ p {
   color: #645beb;
 }
 
-
-@media (min-width : 768px) {
+@media (min-width: 768px) {
   /*
    Si queremos en dos columnas repo-stats en pantallas grandes. si hay muchas techs se descuadran :'(
     .repo-stats{
         flex-direction: row;
     }*/
 
-    .fitImage img:hover{
-      transform: scale(2);
+  .fitImage img:hover {
+    transform: scale(2);
   }
 }
 </style>
