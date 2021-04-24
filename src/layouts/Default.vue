@@ -1,34 +1,22 @@
 <template>
   <div class="layout">
-
     <Nav />
-      <slot/>
+    <slot />
 
-   <ScrollToTop />
-
+    <ScrollToTop />
   </div>
 </template>
 
-<static-query>
-query {
-  metadata {
-    siteName
-  }
-}
-</static-query>
-
 <script>
-import Nav from '~/components/Nav';
-import ScrollToTop from '~/components/ScrollToTop';
+import Nav from "~/components/Nav";
+import ScrollToTop from "~/components/ScrollToTop";
 
 export default {
-  components : {
+  components: {
     Nav,
-    ScrollToTop
-  }
-}
+    ScrollToTop,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
