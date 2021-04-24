@@ -1,25 +1,22 @@
 <template>
-    <div class="main">
-        <div id="stack" v-waypoint="{ active: true, callback: onWaypoint}"></div>
-    <div  class="skills-container animated">
-
-    <!-- Ancla -->
-    
+  <div class="main">
+    <div id="stack" v-waypoint="{ active: true, callback: onWaypoint }"></div>
+    <div class="skills-container animated">
+      <!-- Ancla -->
 
       <div class="skills-bar" v-if="profile">
         <h1 class="skills-heading">Mi Stack tecnológico</h1>
 
         <!-- Leyenda  -->
-        <div style="display: flex;flex-direction:row;flex-wrap: wrap; margin :5px;justify-content:center;">
-            <span :style="styleTechName('backend')">Backend</span>
-            <span :style="styleTechName('design')">Diseño</span>
-            <span :style="styleTechName('frontend')">Frontend</span>
-            <span :style="styleTechName('fullstack')">Full Stack</span>
-            <span :style="styleTechName('game')">Juegos</span>
-            <span :style="styleTechName('hybrid')">Híbridas</span>
-            <span :style="styleTechName('native')">Nativas</span>
-       
-            
+        <div
+          style="display: flex;flex-direction:row;flex-wrap:wrap;margin:5px;justify-content:center;"
+        >
+          <span
+            v-for="type of TYPES"
+            :key="type"
+            :style="styleTechName(type)"
+            >{{ type.toUpperCase() }}</span
+          >
         </div>
 
         <div
@@ -28,43 +25,47 @@
           v-bind:key="skill._id"
         >
           <span v-if="index < profile.about.skills.length / 2">
-
-                <img width="30" :src="skill.tech.icon" :alt="skill.tech.name"  style="min-height: 30px; margin-bottom: -10px; margin-right: 3px">
-                {{ skill.tech.name }}
-
+            <img
+              width="30"
+              :src="skill.tech.icon"
+              :alt="skill.tech.name"
+              style="min-height: 30px; margin-bottom: -10px; margin-right: 3px"
+            />
+            {{ skill.tech.name }}
           </span>
           <div v-if="index < profile.about.skills.length / 2" class="meter">
-            <span :style="setWidth(skill.tech.type,skill.percentage)"></span>
+            <span :style="setWidth(skill.tech.type, skill.percentage)"></span>
           </div>
         </div>
       </div>
-       
-       <div class="skills-bar" v-if="profile">
-          <!-- <span id="imgSvg" style="text-align: center;" >
+
+      <div class="skills-bar" v-if="profile">
+        <!-- <span id="imgSvg" style="text-align: center;" >
                 <g-image alt="Skills" src="~/assets/images/skill.svg" style="width : 20vh; margin-left: -50px;"></g-image>
            </span> -->
-           <div class="displayOnBig"></div>
+        <div class="displayOnBig"></div>
 
-            <div
+        <div
           class="skill"
           v-for="(skill, index) of profile.about.skills"
           v-bind:key="skill._id"
         >
           <span v-if="index >= profile.about.skills.length / 2">
-           
-                <img width="30" :src="skill.tech.icon" :alt="skill.tech.name" style="margin-bottom: -10px">
-                {{ skill.tech.name }}
-                
+            <img
+              width="30"
+              :src="skill.tech.icon"
+              :alt="skill.tech.name"
+              style="margin-bottom: -10px"
+            />
+            {{ skill.tech.name }}
           </span>
           <div v-if="index >= profile.about.skills.length / 2" class="meter">
-            <span :style="setWidth(skill.tech.type,skill.percentage)"></span>
+            <span :style="setWidth(skill.tech.type, skill.percentage)"></span>
           </div>
         </div>
-       </div>
-
+      </div>
     </div>
-</div>
-   
+  </div>
 </template>
 <static-query>
 query {
@@ -89,16 +90,16 @@ query {
 </static-query>
 
 <script>
-import _ from "lodash";
-import {setColorByType} from '../utils';
+import { orderBy } from "lodash";
+import { setColorByType, TYPES } from "../utils";
 
 export default {
   mounted() {
     this.profile = this.$static.profile.edges[0].node;
     var skills = this.profile.about.skills;
-    
+
     //orderBy
-    var newSkills = _.orderBy(
+    var newSkills = orderBy(
       skills,
       ["tech.type", "percentage"],
       ["asc", "desc"]
@@ -110,40 +111,39 @@ export default {
     return {
       active: true,
       profile: null,
+      TYPES,
     };
   },
   methods: {
-    onWaypoint(waypoint){
-        if (waypoint.going == 'in'){
+    onWaypoint(waypoint) {
+      if (waypoint.going == "in") {
+        var skillsContainer = document
+          .getElementsByClassName("skills-container")
+          .item(0);
+        skillsContainer.classList.add("fadeInBottom");
 
-            var skillsContainer = document.getElementsByClassName('skills-container').item(0);
-            skillsContainer.classList.add("fadeInBottom");
-
-             setTimeout(() =>{
-                    skillsContainer.classList.remove("fadeInBottom");
-                }, 3000);
-        }
+        setTimeout(() => {
+          skillsContainer.classList.remove("fadeInBottom");
+        }, 3000);
+      }
     },
-    setWidth(type,percentage) {
-     let color = setColorByType(type);
+    setWidth(type, percentage) {
+      let color = setColorByType(type);
       var width = percentage + "%";
       return {
         width,
-        backgroundColor : color
+        backgroundColor: color,
       };
     },
-     styleTechName(type){
-          let color = setColorByType(type);
-         
-            return {
-              padding:'2px 5px',
-              border : '2px solid '+ color,
-              borderRadius:'30px',
-              maxHeight: '50px !important',
-              lineHeight : '1em',
-              marginRight: '5px',
-            }
-      }
+    styleTechName(type) {
+      let color = setColorByType(type);
+
+      return {
+        color,
+        margin: "5px",
+        fontWeight: "bold",
+      };
+    },
   },
 };
 </script>
@@ -166,7 +166,7 @@ export default {
     transform: translateY(0);
   }
 }
-.fadeInBottom{
+.fadeInBottom {
   -webkit-animation-name: fadeInBottom;
   animation-name: fadeInBottom;
 }
@@ -214,30 +214,30 @@ export default {
   height: auto;
 }
 
- .skills-heading{
-      line-height: 3rem;
-  }
+.skills-heading {
+  line-height: 3rem;
+}
 
-  .skill {
-    margin: 20px;
-  }
+.skill {
+  margin: 20px;
+}
 
-.displayOnBig{
-    display: block;
-    width: 100%;
-    height: 12vw;
-  }
+.displayOnBig {
+  display: block;
+  width: 100%;
+  height: 12vw;
+}
 
 /* Media Query */
 
 @media (max-width: 1456px) {
-  .skills-image{
+  .skills-image {
     display: none;
     order: 2;
   }
 
-  .meter{
-      width: 80%;
+  .meter {
+    width: 80%;
   }
 }
 
@@ -246,17 +246,17 @@ export default {
     flex-direction: column;
   }
 
-  .skills-image,#imgSvg {
+  .skills-image,
+  #imgSvg {
     display: none;
     order: 2;
   }
-  .meter{
-      width: inherit;
-      margin-top: 2.5vw;
+  .meter {
+    width: inherit;
+    margin-top: 2.5vw;
   }
-  .displayOnBig{
+  .displayOnBig {
     display: none;
   }
-
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div class="education-section" id="education">
-      <div id="education" v-waypoint="{ active: true, callback: onWaypointLeft}"></div>
+    <div
+      id="education"
+      v-waypoint="{ active: true, callback: onWaypointLeft }"
+    ></div>
     <h1 class="education-heading">Formación</h1>
     <!-- Fade left -->
     <div class="education-card-container animated">
@@ -31,14 +34,20 @@
     </div>
 
     <hr />
-        <div id="courses" v-waypoint="{ active: true, callback: onWaypointRight}"></div>
-   
+    <div
+      id="courses"
+      v-waypoint="{ active: true, callback: onWaypointRight }"
+    ></div>
+
     <h1 class="education-heading">Cursos</h1>
-     <!-- Fade right -->
+    <!-- Fade right -->
     <div class="education-card-container animated">
-       
       <!-- EducationForCourses -->
-      <div class="education-card" v-for="course of $static.courses.edges" v-bind:key="course.id">
+      <div
+        class="education-card"
+        v-for="course of $static.courses.edges"
+        v-bind:key="course.id"
+      >
         <div class="education-card-left">
           <img
             class="education-roundedimg"
@@ -47,29 +56,34 @@
           />
         </div>
         <div class="education-card-right">
-          <h5 class="education-text-school">{{course.node.platform}}</h5>
+          <h5 class="education-text-school">{{ course.node.platform }}</h5>
 
           <div class="education-text-details">
             <h5 class="education-text-subHeader">
-                 <a :href="course.node.url"> {{course.node.name}}</a>
+              <a :href="course.node.url"> {{ course.node.name }}</a>
             </h5>
-            <p class="education-text-duration">{{course.node.language}} - {{ (course.node.duration / 60).toFixed(2) }} horas</p>
-            <p class="education-text-desc">
-              {{course.node.description}}
+            <p class="education-text-duration">
+              {{ course.node.language }} -
+              {{ (course.node.duration / 60).toFixed(2) }} horas
             </p>
-                <!-- Techs display -->
-                <div>
-                    <div class="software-skills-main-div">
-                        <ul class="dev-icons">
-                       
-                            <li class="software-skill-inline" v-for="tech in course.node.techs"  v-bind:key="tech._id">
-                                <img width="30" :src="tech.icon" :alt="tech.name">
-                                <p :style=" styleTechName(tech.type) ">{{tech.name}}</p>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                </div>
+            <p class="education-text-desc">
+              {{ course.node.description }}
+            </p>
+            <!-- Techs display -->
+            <div>
+              <div class="software-skills-main-div">
+                <ul class="dev-icons">
+                  <li
+                    class="software-skill-inline"
+                    v-for="tech in course.node.techs"
+                    v-bind:key="tech._id"
+                  >
+                    <img width="30" :src="tech.icon" :alt="tech.name" />
+                    <p :style="styleTechName(tech.type)">{{ tech.name }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -102,49 +116,54 @@ query {
 </static-query>
 
 <script>
-import {setColorByType} from '../utils';
+import { setColorByType } from "../utils";
 
 export default {
-    data(){
-        return{
-            active : true
-        }
+  data() {
+    return {
+      active: true,
+    };
+  },
+  methods: {
+    pathToImg(platform) {
+      return `https://res.cloudinary.com/omarpvcloud/image/upload/v1606471573/logos/${platform}.png`;
     },
-    methods:{
-        pathToImg( platform){
-            return `https://res.cloudinary.com/omarpvcloud/image/upload/v1606471573/logos/${platform}.png`;
-        },
-        onWaypointLeft(waypoint){
-             if (waypoint.going == 'in'){
-                var educationCardContainer = document.getElementsByClassName('education-card-container').item(0);
-                educationCardContainer.classList.add("fadeInLeft");
+    onWaypointLeft(waypoint) {
+      if (waypoint.going == "in") {
+        var educationCardContainer = document
+          .getElementsByClassName("education-card-container")
+          .item(0);
+        educationCardContainer.classList.add("fadeInLeft");
 
-                setTimeout(() =>{
-                    educationCardContainer.classList.remove("fadeInLeft");
-                }, 3000);
-            }
-        },
-         onWaypointRight(waypoint){
-             if (waypoint.going == 'in'){
-                var educationCardContainer = document.getElementsByClassName('education-card-container').item(1);
-                educationCardContainer.classList.add("fadeInRight");
-
-                setTimeout(() =>{
-                    educationCardContainer.classList.remove("fadeInRight");
-                }, 3000);
-            }
-        },
-         styleTechName(type){
-
-          let color = setColorByType(type);   
-
-          return {
-            padding:'2px 5px',
-            border : '2px solid '+ color,
-            borderRadius:'30px'
-          }
+        setTimeout(() => {
+          educationCardContainer.classList.remove("fadeInLeft");
+        }, 3000);
       }
-    }
+    },
+    onWaypointRight(waypoint) {
+      if (waypoint.going == "in") {
+        var educationCardContainer = document
+          .getElementsByClassName("education-card-container")
+          .item(1);
+        educationCardContainer.classList.add("fadeInRight");
+
+        setTimeout(() => {
+          educationCardContainer.classList.remove("fadeInRight");
+        }, 3000);
+      }
+    },
+    styleTechName(type) {
+      let color = setColorByType(type);
+
+      return {
+        padding: "2px 5px",
+        backgroundColor: color,
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "30px",
+      };
+    },
+  },
 };
 </script>
 
@@ -182,8 +201,8 @@ export default {
   -webkit-animation-name: fadeInLeft;
   animation-name: fadeInLeft;
 }
-.fadeInRight{
--webkit-animation-name: fadeInRight;
+.fadeInRight {
+  -webkit-animation-name: fadeInRight;
   animation-name: fadeInRight;
 }
 
@@ -278,12 +297,12 @@ export default {
   margin-top: 0.5rem;
 }
 
-.education-card{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    width: 100%;
-    margin: 0;
+.education-card {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
 }
 
 /* Media Query */
@@ -320,10 +339,10 @@ export default {
 }
 
 @media (min-width: 1380px) {
-   .education-card {
+  .education-card {
     width: 60%;
     margin: 0 auto;
-  } 
+  }
 }
 
 @media (max-width: 768px) {
@@ -377,7 +396,7 @@ export default {
   color: #868e96;
   font-size: 10px;
 }
-.software-skill-inline > i:hover ~ p{
+.software-skill-inline > i:hover ~ p {
   color: #645beb;
 }
 </style>

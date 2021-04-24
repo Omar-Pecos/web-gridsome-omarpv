@@ -5,9 +5,9 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Gridsome',
-  icon: './src/favicon.png',
-  siteDescription : 'Omar Pecos - Desarrollador Full Stack',
+  siteName: "Mi web",
+  icon: "./src/favicon.png",
+  siteDescription: "Omar Pecos - Desarrollador Full Stack",
   plugins: [],
-  pathPrefix : '/web'
-}
+  pathPrefix: "/web",
+};
