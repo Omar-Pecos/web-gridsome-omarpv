@@ -5,7 +5,7 @@
         id="projects"
         v-waypoint="{ active: true, callback: onWaypoint }"
       ></div>
-      <h1 class="project-title">Proyectos</h1>
+      <h1 class="project-title">{{ $t("Navbar.projects") }}</h1>
       <div class="repo-cards-div-main" v-if="completeData">
         <ProjectCard
           v-for="project of pinned"
@@ -15,14 +15,16 @@
       </div>
 
       <Button
-        text="Otros Proyectos"
+        :text="$t('Projects.other_projects')"
         class="project-button"
         href="#otherprojects"
       />
 
       <div class="project-button">
         <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button" @click="openUrl('/web/portfolio/')">Portfolio</a>
+        <a class="main-button" @click="openUrl('/web/portfolio/')">{{
+          $t("Navbar.portfolio")
+        }}</a>
       </div>
     </div>
 
@@ -31,7 +33,7 @@
         id="otherprojects"
         v-waypoint="{ active: true, callback: onWaypointOther }"
       ></div>
-      <h1 class="project-title">Otros Proyectos</h1>
+      <h1 class="project-title">{{ $t("Projects.other_projects") }}</h1>
       <div class="repo-cards-div-main" v-if="completeData">
         <ProjectCard
           :key="allProjects.backend[indexes.backend].id"
@@ -61,7 +63,9 @@
 
       <div class="project-button">
         <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button" @click="openUrl('/web/portfolio/')">Portfolio</a>
+        <a class="main-button" @click="openUrl('/web/portfolio/')">{{
+          $t("Navbar.portfolio")
+        }}</a>
       </div>
     </div>
   </div>

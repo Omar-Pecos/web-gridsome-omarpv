@@ -5,7 +5,7 @@
         style="text-align: center; margin-bottom: 10px;"
         class="project-title"
       >
-        Mi Portfolio
+        {{ $t("Portfolio.my_portfolio") }}
       </h1>
       <!-- Github link -->
       <div style="text-align: center">
@@ -23,7 +23,7 @@
           style="font-weight:bold;margin-right:10px;"
           :class="{ typeActive: typeSearched === 'ALL' }"
           @click="() => (typeSearched = 'ALL')"
-          >ALL TYPES</span
+          >{{ $t("Portfolio.all_types") }}</span
         >
         <span
           v-for="type of TYPES"
@@ -70,6 +70,10 @@
               <p class="repo-description-clip">
                 {{ project.node.description }}
               </p>
+              <TranslateButton
+                v-if="$i18n.locale !== 'es'"
+                :text="project.node.description"
+              />
 
               <div class="repo-stats">
                 <div class="repo-left-stat">
@@ -137,13 +141,17 @@
           <p class="repo-description-detail">
             {{ projectDisplayed.description }}
           </p>
+          <TranslateButton
+            v-if="$i18n.locale !== 'es'"
+            :text="projectDisplayed.description"
+          />
 
           <div
             v-if="projectDisplayed.images.length > 0"
             style="text-align:center;padding: 10px 0"
           >
             <span @click="changeImageVisibility(seeingImages)"
-              >Ver Imágenes
+              >{{ $t("Project_card.see_images") }}
             </span>
           </div>
           <!-- Display Images -->
@@ -162,7 +170,7 @@
             style="text-align:center;padding: 10px 0"
           >
             <span @click="() => (seeingFiles = !seeingFiles)"
-              >Ver Archivos
+              >{{ $t("Project_card.see_files") }}
             </span>
           </div>
           <!-- Display Files -->
@@ -173,7 +181,7 @@
               @click="openRepoinNewTab(file)"
               style="padding:2px 5px;border : 2px solid black;borderRadius:30px;"
             >
-              Archivo {{ index + 1 }}
+              {{ $t("Project_card.file") }} {{ index + 1 }}
             </span>
           </div>
 
@@ -242,6 +250,7 @@ query {
 </page-query>
 
 <script>
+import TranslateButton from "~/components/TranslateButton.vue";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
@@ -298,6 +307,7 @@ export default {
   },
   components: {
     VueSlickCarousel,
+    TranslateButton,
   },
   mounted() {
     // WIP - no native projects at this time so erasing from filtering (error with Slider)

@@ -5,7 +5,7 @@
       <!-- Ancla -->
 
       <div class="skills-bar" v-if="profile">
-        <h1 class="skills-heading">Mi Stack tecnológico</h1>
+        <h1 class="skills-heading">{{ $t("Navbar.stack") }}</h1>
 
         <!-- Leyenda  -->
         <div

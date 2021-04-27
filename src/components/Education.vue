@@ -4,7 +4,7 @@
       id="education"
       v-waypoint="{ active: true, callback: onWaypointLeft }"
     ></div>
-    <h1 class="education-heading">Formación</h1>
+    <h1 class="education-heading">{{ $t("Navbar.education") }}</h1>
     <!-- Fade left -->
     <div class="education-card-container animated">
       <!-- EducationCard -->
@@ -21,12 +21,11 @@
 
           <div class="education-text-details">
             <h5 class="education-text-subHeader">
-              CFGS Desarrollo de Aplicaciones Web
+              {{ $t("Education.studies") }}
             </h5>
             <p class="education-text-duration">2017-2019</p>
             <p class="education-text-desc">
-              Interfaces web, desarrollo entorno Servidor (PHP) y entorno
-              Cliente (JavaScript)
+              {{ $t("Education.studies_description") }}
             </p>
           </div>
         </div>
@@ -39,7 +38,7 @@
       v-waypoint="{ active: true, callback: onWaypointRight }"
     ></div>
 
-    <h1 class="education-heading">Cursos</h1>
+    <h1 class="education-heading">{{ $t("Navbar.courses") }}</h1>
     <!-- Fade right -->
     <div class="education-card-container animated">
       <!-- EducationForCourses -->
@@ -64,10 +63,15 @@
             </h5>
             <p class="education-text-duration">
               {{ course.node.language }} -
-              {{ (course.node.duration / 60).toFixed(2) }} horas
+              {{ (course.node.duration / 60).toFixed(2) }}
+              {{ $t("Courses.hours") }}
             </p>
             <p class="education-text-desc">
               {{ course.node.description }}
+              <TranslateButton
+                v-if="$i18n.locale !== 'es'"
+                :text="course.node.description"
+              />
             </p>
             <!-- Techs display -->
             <div>
@@ -117,8 +121,12 @@ query {
 
 <script>
 import { setColorByType } from "../utils";
+import TranslateButton from "./TranslateButton.vue";
 
 export default {
+  components: {
+    TranslateButton,
+  },
   data() {
     return {
       active: true,

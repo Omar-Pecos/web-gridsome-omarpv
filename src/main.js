@@ -5,17 +5,36 @@ import "~/assets/styles.css";
 import DefaultLayout from "~/layouts/Default.vue";
 import VueWaypoint from "vue-waypoint";
 import VueGtag from "vue-gtag";
+import VueI18n from "vue-i18n";
+import { es, en, it, fr } from "./translations";
+import VuejsDialog from "vuejs-dialog";
+import "vuejs-dialog/dist/vuejs-dialog.min.css";
+import VueCookies from "vue-cookies";
 
-export default function(Vue, { router, head, isClient }) {
+export default function(Vue, { appOptions, router, head, isClient }) {
   head.link.push({
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Montserrat&display=swap",
   });
-
-  Vue.use(VueGtag, {
-    config: { id: "G-T6Z1E7LFTK" },
+  Vue.use(VuejsDialog);
+  Vue.use(VueCookies);
+  Vue.$cookies.config("30d");
+  Vue.use(VueI18n);
+  const i18n = new VueI18n({
+    locale: "es",
+    fallbackLocale: "es",
+    messages: {
+      es,
+      en,
+      it,
+      fr,
+    },
   });
-  // Set default layout as a global component
+  appOptions.i18n = i18n;
+  Vue.use(VueGtag, {
+    config: { id: process.env.GRIDSOME_GA_ID },
+  });
+
   Vue.component("Layout", DefaultLayout);
   Vue.use(VueWaypoint);
 }

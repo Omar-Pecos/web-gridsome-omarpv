@@ -5,7 +5,7 @@
         <div>
           <h1 class="greeting-text">
             {{ " " }}
-            {{ "Hola, soy Omar Pecos" }}{{ " " }}
+            {{ $t("Greeting.hello") }}{{ " " }}
             <span class="wave-emoji">
               <g-image
                 alt="Hello!"
@@ -15,6 +15,10 @@
           </h1>
           <p class="greeting-text-p subTitle">
             {{ $static.profile.edges[0].node.intro }}
+            <TranslateButton
+              v-if="$i18n.locale !== 'es'"
+              :text="$static.profile.edges[0].node.intro"
+            />
           </p>
 
           <!-- Social media  -->
@@ -64,7 +68,7 @@
           </div>
 
           <div class="button-greeting-div">
-            <ButtonVue text="Contáctame" href="#contact" />
+            <ButtonVue :text="$t('Greeting.contact_me')" href="#contact" />
           </div>
         </div>
       </div>
@@ -92,9 +96,11 @@ query {
 
 <script>
 import ButtonVue from "./Button.vue";
+import TranslateButton from "./TranslateButton.vue";
 export default {
   components: {
     ButtonVue,
+    TranslateButton,
   },
 };
 </script>

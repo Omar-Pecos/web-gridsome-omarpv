@@ -11,8 +11,11 @@
     "dotenv": "^8.2.0",
     "gridsome": "^0.7.0",
     "lodash.sortby": "^4.7.0",
+    "vue-cookies": "^1.7.4",
     "vue-gtag": "^1.14.0",
+    "vue-i18n": "^8.24.3",
     "vue-slick-carousel": "^1.0.6",
-    "vue-waypoint": "^3.5.2"
+    "vue-waypoint": "^3.5.2",
+    "vuejs-dialog": "^1.4.2"
   }
 }

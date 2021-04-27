@@ -1,0 +1,44 @@
+{
+  "Navbar": {
+    "skills": "Skills",
+    "stack": "Tech Stack",
+    "education": "Formation",
+    "courses": "Courses",
+    "projects": "Projects",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "Greeting": {
+    "hello": "Hello, I am Omar Pecos",
+    "contact_me": "Contact me"
+  },
+  "Skills": {
+    "subtitle": "Web developer who enjoys learning new technologies and putting them into practice",
+    "skills_back": "Developing RESTful APIs or GraphQL APIs",
+    "skills_front": "Develop frontend applications with the most popular JavaScript frameworks (Angular, React, Vue)",
+    "skills_fullstack": "Full Stack applications and more"
+  },
+  "Education": {
+    "studies": "CFGS Web Application Development",
+    "studies_description": "Web interfaces, development Server environment (PHP) and Client environment (JavaScript)"
+  },
+  "Courses": {
+    "hours": "hours"
+  },
+  "Projects": {
+    "other_projects": "Other Projects"
+  },
+  "Project_card": {
+    "see_images": "See images",
+    "see_files": "See resources",
+    "file": "Resource"
+  },
+  "Contact": {
+    "my_occupation": "Full Stack Developer",
+    "my_location": "Huelva, Andalusia, Spain"
+  },
+  "Portfolio": {
+    "my_portfolio": "My Portfolio",
+    "all_types": "ALL TYPES"
+  }
+}
