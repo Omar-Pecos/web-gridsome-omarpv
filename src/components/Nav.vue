@@ -26,28 +26,48 @@
       </label>
       <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
         <li>
-          <a :href="webUrl + '/#skills'">Aptitudes</a>
+          <a :href="webUrl + '/#skills'">{{ $t("Navbar.skills") }}</a>
         </li>
         <li>
-          <a :href="webUrl + '/#stack'">Mi Stack</a>
+          <a :href="webUrl + '/#stack'">{{ $t("Navbar.stack") }}</a>
         </li>
         <li>
-          <a :href="webUrl + '/#education'">Formación</a>
+          <a :href="webUrl + '/#education'">{{ $t("Navbar.education") }}</a>
         </li>
         <li>
-          <a :href="webUrl + '/#courses'">Cursos</a>
+          <a :href="webUrl + '/#courses'">{{ $t("Navbar.courses") }}</a>
         </li>
         <li>
-          <a :href="webUrl + '/#projects'">Proyectos</a>
+          <a :href="webUrl + '/#projects'">{{ $t("Navbar.projects") }}</a>
         </li>
         <li>
           <!-- <g-link to="/portfolio/">Portfolio</g-link> -->
-          <a style="cursor:pointer;" @click="openUrl('/web/portfolio/')"
-            >Portfolio</a
-          >
+          <a style="cursor:pointer;" @click="openUrl('/web/portfolio/')">{{
+            $t("Navbar.portfolio")
+          }}</a>
         </li>
         <li>
-          <a :href="webUrl + '/#contact'">Contacto</a>
+          <a :href="webUrl + '/#contact'">{{ $t("Navbar.contact") }}</a>
+        </li>
+
+        <li class="translations">
+          <img
+            width="30"
+            :alt="$i18n.locale"
+            :src="urlLogo($i18n.locale)"
+            id="selected-locale"
+            @click="() => (localeDropdown = !localeDropdown)"
+          />
+          <ul v-if="localeDropdown" class="locale-dropdown">
+            <li v-for="lang of langs" :key="lang">
+              <img
+                width="30"
+                :alt="lang"
+                :src="urlLogo(lang)"
+                @click="selectLocale(lang)"
+              />
+            </li>
+          </ul>
         </li>
       </ul>
     </header>
@@ -55,12 +75,23 @@
 </template>
 
 <script>
+import { cookieName, defaultCookie } from "../utils";
 export default {
   data() {
     return {
       webUrl: "https://omarpecos.com/web",
       menuDisplay: false,
+      localeDropdown: false,
+      langs: ["es", "en", "it", "fr"],
     };
+  },
+  mounted() {
+    //see if cookie exists already
+    if (this.$cookies.isKey(cookieName)) {
+      //if exists set values from cookie
+      const cookie = this.$cookies.get(cookieName);
+      this.$i18n.locale = cookie.locale;
+    }
   },
   methods: {
     displayNav(menuDisplay) {
@@ -69,6 +100,27 @@ export default {
     },
     openUrl(url) {
       window.open(url, "_self");
+    },
+    urlLogo(lang) {
+      return `https://res.cloudinary.com/omarpvcloud/image/upload/v1619261276/Projects/api-node-portfolio/translation_logos/${lang}.png`;
+    },
+    selectLocale(lang) {
+      this.createCookieOrEdit("locale", lang);
+      this.$i18n.locale = lang;
+      this.localeDropdown = false;
+    },
+    createCookieOrEdit(property, value) {
+      let cookie;
+      if (!this.$cookies.isKey(cookieName)) {
+        // create cookie
+        cookie = defaultCookie;
+        cookie[property] = value;
+      } else {
+        // edit cookie whit new value
+        cookie = this.$cookies.get(cookieName);
+        cookie[property] = value;
+      }
+      this.$cookies.set(cookieName, body);
     },
   },
 };
@@ -231,6 +283,26 @@ export default {
 #omarpv-logo {
   width: 50px !important;
 }
+.translations {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#selected-locale {
+  position: relative;
+  bottom: -3px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+.locale-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+}
+.locale-dropdown li {
+  height: 23px;
+}
 /* 48em = 768px */
 
 @media (min-width: 48em) {
@@ -251,6 +323,17 @@ export default {
 
   #omarpv-logo {
     width: 100px !important;
+  }
+  .translations {
+    display: block;
+  }
+  #selected-locale {
+    margin-right: 0;
+    margin-left: 0;
+    bottom: -10px;
+  }
+  .locale-dropdown {
+    flex-direction: column;
   }
 }
 @media (max-width: 960px) and (min-width: 768px) {

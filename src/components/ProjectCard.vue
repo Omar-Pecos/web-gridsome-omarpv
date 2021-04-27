@@ -26,12 +26,20 @@
           alt="point"
         ></g-image>
       </div>
-      <p class="repo-description">{{ project.description }}</p>
+      <p class="repo-description">
+        {{ project.description }}
+      </p>
+      <TranslateButton
+        v-if="$i18n.locale !== 'es'"
+        :text="project.description"
+      />
       <div
         v-if="project.images.length > 0"
         style="text-align:center;padding: 10px 0"
       >
-        <span @click="changeImageVisibility(seeingImages)">Ver Imágenes </span>
+        <span @click="changeImageVisibility(seeingImages)"
+          >{{ $t("Project_card.see_images") }}
+        </span>
       </div>
       <div class="image-div" v-if="seeingImages">
         <span
@@ -77,8 +85,12 @@
 
 <script>
 import { setColorByType } from "../utils";
+import TranslateButton from "./TranslateButton.vue";
 
 export default {
+  components: {
+    TranslateButton,
+  },
   props: ["project"],
   data() {
     return {

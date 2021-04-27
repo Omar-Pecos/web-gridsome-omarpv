@@ -19,7 +19,7 @@
               style="transform: rotateZ(90deg);margin-bottom: -7px;"
               alt="point"
             ></g-image>
-            Desarrollar APIs Restful o APIs de GraphQL
+            {{ $t("Skills.skills_back") }}
           </div>
           <div class="subTitle skills-text">
             <g-image
@@ -28,8 +28,7 @@
               style="transform: rotateZ(90deg);margin-bottom: -7px;"
               alt="point"
             ></g-image>
-            Desarrollar aplicaciones frontend con los frameworks de JavaScript
-            más conocidos (Angular,React,Vue)
+            {{ $t("Skills.skills_front") }}
           </div>
           <div class="subTitle skills-text">
             <g-image
@@ -38,17 +37,16 @@
               style="transform: rotateZ(90deg);margin-bottom: -7px;"
               alt="point"
             ></g-image>
-            Aplicaciones Full Stack y más
+            {{ $t("Skills.skills_fullstack") }}
           </div>
         </div>
       </div>
 
       <!-- Transition right -->
       <div class="skills-text-div animated">
-        <h1 class="skills-heading">{{ "Aptitudes" }}{{ " " }}</h1>
+        <h1 class="skills-heading">{{ $t("Navbar.skills") }}{{ " " }}</h1>
         <p class="subTitle skills-text-subtitle">
-          Desarrollador web que disfruta aprendiendo nuevas tecnologías y
-          poniéndolas en práctica
+          {{ $t("Skills.subtitle") }}
         </p>
 
         <div>
