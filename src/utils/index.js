@@ -81,7 +81,7 @@ export const translate = (text, locale) => {
     });
 };
 
-const dialogOptions = {
+/*const dialogOptions = {
   backdropClose: true,
   animation: "bounce",
   okText: "X",
@@ -96,4 +96,4 @@ export const genDialogData = (text, locale) => {
     message,
     options: dialogOptions,
   };
-};
+}; */

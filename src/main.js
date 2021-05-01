@@ -7,11 +7,9 @@ import VueWaypoint from "vue-waypoint";
 import VueGtag from "vue-gtag";
 import VueI18n from "vue-i18n";
 import { es, en, it, fr } from "./translations";
-import VuejsDialog from "vuejs-dialog";
-import "vuejs-dialog/dist/vuejs-dialog.min.css";
 import VueCookies from "vue-cookies";
 import Vuex from "vuex";
-// TODO --- Add manita señalando en blanco, to top blanco, la localizacion igual
+
 export default function(Vue, { appOptions, router, head, isClient }) {
   head.link.push({
     rel: "stylesheet",
@@ -29,7 +27,6 @@ export default function(Vue, { appOptions, router, head, isClient }) {
     },
   });
   appOptions.store = store;
-  Vue.use(VuejsDialog);
   Vue.use(VueCookies);
   Vue.$cookies.config("30d");
   Vue.use(VueI18n);

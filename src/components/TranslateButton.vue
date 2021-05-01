@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { translate, genDialogData } from "../utils";
+import { translate } from "../utils";
 export default {
   props: ["text"],
   methods: {
@@ -20,12 +20,10 @@ export default {
 
       translate(text, locale)
         .then((res) => {
-          const { message, options } = genDialogData(res, locale);
-          this.$dialog.alert(message, options);
+          window.alert(res);
         })
         .catch((err) => {
-          const { message, options } = genDialogData(err, locale);
-          this.$dialog.alert(message, options);
+          window.alert(err);
         });
     },
   },
