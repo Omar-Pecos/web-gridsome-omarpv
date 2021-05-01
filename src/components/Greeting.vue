@@ -3,7 +3,10 @@
     <div class="greeting-main">
       <div class="greeting-text-div">
         <div>
-          <h1 class="greeting-text">
+          <h1
+            class="greeting-text"
+            :class="{ darkMode: $store.state.darkMode }"
+          >
             {{ " " }}
             {{ $t("Greeting.hello") }}{{ " " }}
             <span class="wave-emoji">
@@ -13,7 +16,10 @@
               ></g-image>
             </span>
           </h1>
-          <p class="greeting-text-p subTitle">
+          <p
+            class="greeting-text-p subTitle"
+            :class="{ darkMode: $store.state.darkMode }"
+          >
             {{ $static.profile.edges[0].node.intro }}
             <TranslateButton
               v-if="$i18n.locale !== 'es'"
@@ -178,7 +184,7 @@ export default {
 .greeting-text {
   font-size: 70px;
   line-height: 1.1;
-  color: black !important;
+  color: black;
 }
 
 .greeting-text-p {

@@ -43,23 +43,13 @@
         >
           <div>
             <div
-              class="repo-card-div"
+              :class="
+                $store.state.darkMode ? 'repo-card-div-dark' : 'repo-card-div'
+              "
               @click="() => (projectDisplayed = project.node)"
             >
               <div class="repo-name-div">
-                <svg
-                  aria-hidden="true"
-                  height="20"
-                  role="img"
-                  viewBox="0 0 12 16"
-                  width="14"
-                  class="repo-svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
-                  ></path>
-                </svg>
+                <RepoLogo />
                 <p
                   class="repo-name"
                   :style="styleTechName(project.node.type, 'title')"
@@ -106,37 +96,28 @@
 
       <!-- Project Detail -->
       <div v-if="projectDisplayed">
-        <div class="repo-card-div" :key="projectDisplayed.id">
+        <div
+          :class="
+            $store.state.darkMode ? 'repo-card-div-dark' : 'repo-card-div'
+          "
+          :key="projectDisplayed.id"
+        >
           <div
             class="repo-name-div"
             @click="openRepoinNewTab(projectDisplayed.url)"
           >
-            <svg
-              aria-hidden="true"
-              height="20"
-              role="img"
-              viewBox="0 0 12 16"
-              width="14"
-              class="repo-svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"
-              ></path>
-            </svg>
+            <RepoLogo />
             <p
               class="repo-name"
               :style="styleTechName(projectDisplayed.type, 'title')"
             >
               {{ projectDisplayed.name }}
             </p>
-            <g-image
+            <HandCursorImg
               v-if="projectDisplayed.url"
-              src="~/assets/images/point.png"
-              width="25"
-              style="transform: rotateZ(-90deg);margin-bottom: -5px;margin-left: 5px;"
-              alt="point"
-            ></g-image>
+              :rotation="-90"
+              :styles="'margin-bottom:-7px;margin-left:10px;'"
+            />
           </div>
           <p class="repo-description-detail">
             {{ projectDisplayed.description }}
@@ -256,6 +237,8 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import { setColorByType, TYPES } from "../utils";
+import HandCursorImg from "../components/HandCursorImg.vue";
+import RepoLogo from "../components/RepoLogo.vue";
 
 export default {
   metaInfo: {
@@ -308,6 +291,8 @@ export default {
   components: {
     VueSlickCarousel,
     TranslateButton,
+    RepoLogo,
+    HandCursorImg,
   },
   mounted() {
     // WIP - no native projects at this time so erasing from filtering (error with Slider)
@@ -371,6 +356,14 @@ export default {
   background-color: rgb(255, 255, 255);
 
   border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.repo-card-div-dark {
+  color: rgb(88, 96, 105);
+  background-color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem;
   cursor: pointer;
 }

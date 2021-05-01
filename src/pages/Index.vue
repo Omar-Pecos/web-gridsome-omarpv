@@ -6,6 +6,7 @@
     <Education />
     <Projects />
     <Contact />
+    <div style="height:50px"></div>
   </Layout>
 </template>
 

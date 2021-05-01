@@ -17,13 +17,23 @@
           />
         </div>
         <div class="education-card-right">
-          <h5 class="education-text-school">IES San Sebastián</h5>
+          <h5 class="education-text-school">
+            IES San Sebastián
+          </h5>
 
           <div class="education-text-details">
-            <h5 class="education-text-subHeader">
+            <h5
+              class="education-text-subHeader"
+              :class="{ darkModeSecondary: $store.state.darkMode }"
+            >
               {{ $t("Education.studies") }}
             </h5>
-            <p class="education-text-duration">2017-2019</p>
+            <p
+              class="education-text-duration"
+              :class="{ darkModeSecondary: $store.state.darkMode }"
+            >
+              2017-2019
+            </p>
             <p class="education-text-desc">
               {{ $t("Education.studies_description") }}
             </p>
@@ -59,9 +69,18 @@
 
           <div class="education-text-details">
             <h5 class="education-text-subHeader">
-              <a :href="course.node.url"> {{ course.node.name }}</a>
+              <a
+                :class="$store.state.darkMode ? 'links-dark' : 'links'"
+                :href="course.node.url"
+                target="_blank"
+              >
+                {{ course.node.name }}</a
+              >
             </h5>
-            <p class="education-text-duration">
+            <p
+              class="education-text-duration"
+              :class="{ darkModeSecondary: $store.state.darkMode }"
+            >
               {{ course.node.language }} -
               {{ (course.node.duration / 60).toFixed(2) }}
               {{ $t("Courses.hours") }}

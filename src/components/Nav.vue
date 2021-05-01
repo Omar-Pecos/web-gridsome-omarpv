@@ -1,11 +1,11 @@
 <template>
-  <div class="layout">
+  <div id="header" class="layout">
     <!-- nav -->
-    <header class="header">
+    <header class="header" :class="{ 'dark-menu': $store.state.darkMode }">
       <a
         href="/"
         class="logo"
-        v-bind:style="{ display: [menuDisplay ? 'none' : 'block'] }"
+        :style="{ display: [menuDisplay ? 'none' : 'block'] }"
       >
         <span class="logo-name">
           <g-image
@@ -22,9 +22,18 @@
         style="color: white"
         v-on:click="displayNav(menuDisplay)"
       >
-        <span class="navicon"></span>
+        <span
+          class="navicon"
+          :class="{ 'navicon-dark': $store.state.darkMode }"
+          :style="{ background: [$store.state.darkMode ? 'white' : '#333'] }"
+        ></span>
       </label>
-      <ul class="menu" v-bind:class="[menuDisplay ? 'showContent' : 'block']">
+      <ul
+        :class="[
+          $store.state.darkMode ? 'dark-menu menu' : 'menu',
+          menuDisplay ? 'showContent' : 'block',
+        ]"
+      >
         <li>
           <a :href="webUrl + '/#skills'">{{ $t("Navbar.skills") }}</a>
         </li>
@@ -69,6 +78,13 @@
             </li>
           </ul>
         </li>
+        <li class="translations">
+          <DarkModeSwitch
+            id="switch-dark-mode"
+            @switched="onSwitched"
+            :initialState="$store.state.darkMode"
+          />
+        </li>
       </ul>
     </header>
   </div>
@@ -76,6 +92,9 @@
 
 <script>
 import { cookieName, defaultCookie } from "../utils";
+import DarkModeSwitch from "vue-dark-mode-switch";
+import "vue-dark-mode-switch/dist/vue-dark-mode-switch.css";
+
 export default {
   data() {
     return {
@@ -85,12 +104,16 @@ export default {
       langs: ["es", "en", "it", "fr"],
     };
   },
+  components: {
+    DarkModeSwitch,
+  },
   mounted() {
     //see if cookie exists already
     if (this.$cookies.isKey(cookieName)) {
       //if exists set values from cookie
       const cookie = this.$cookies.get(cookieName);
       this.$i18n.locale = cookie.locale;
+      this.$store.commit("setDarkMode", cookie.darkMode);
     }
   },
   methods: {
@@ -120,7 +143,11 @@ export default {
         cookie = this.$cookies.get(cookieName);
         cookie[property] = value;
       }
-      this.$cookies.set(cookieName, body);
+      this.$cookies.set(cookieName, cookie);
+    },
+    onSwitched(isSwitched) {
+      this.createCookieOrEdit("darkMode", isSwitched);
+      this.$store.commit("setDarkMode", isSwitched);
     },
   },
 };
@@ -154,6 +181,12 @@ export default {
   max-width: 100%;
   padding: 15px 20px;
   margin: 0px auto;
+}
+
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 
 .header ul {
@@ -294,6 +327,13 @@ export default {
   margin-right: 10px;
   margin-left: 20px;
 }
+#switch-dark-mode {
+  position: relative;
+  bottom: -3px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
 .locale-dropdown {
   display: flex;
   flex-direction: row;
@@ -330,10 +370,16 @@ export default {
   #selected-locale {
     margin-right: 0;
     margin-left: 0;
-    bottom: -10px;
+    bottom: -11px;
   }
   .locale-dropdown {
     flex-direction: column;
+  }
+  #switch-dark-mode {
+    margin-top: 0px;
+    margin-right: 0;
+    margin-left: 5px;
+    bottom: -13px;
   }
 }
 @media (max-width: 960px) and (min-width: 768px) {

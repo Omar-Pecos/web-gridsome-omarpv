@@ -33,7 +33,13 @@
             />
             {{ skill.tech.name }}
           </span>
-          <div v-if="index < profile.about.skills.length / 2" class="meter">
+          <div
+            v-if="index < profile.about.skills.length / 2"
+            class="meter"
+            :style="{
+              background: $store.state.darkMode ? '#e0dede' : '#eae5e5',
+            }"
+          >
             <span :style="setWidth(skill.tech.type, skill.percentage)"></span>
           </div>
         </div>
@@ -59,7 +65,13 @@
             />
             {{ skill.tech.name }}
           </span>
-          <div v-if="index >= profile.about.skills.length / 2" class="meter">
+          <div
+            v-if="index >= profile.about.skills.length / 2"
+            class="meter"
+            :style="{
+              background: $store.state.darkMode ? '#e0dede' : '#eae5e5',
+            }"
+          >
             <span :style="setWidth(skill.tech.type, skill.percentage)"></span>
           </div>
         </div>

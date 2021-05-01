@@ -13,30 +13,15 @@
 
         <div style="padding:15px;">
           <div class="subTitle skills-text">
-            <g-image
-              src="~/assets/images/point.png"
-              width="25"
-              style="transform: rotateZ(90deg);margin-bottom: -7px;"
-              alt="point"
-            ></g-image>
+            <HandCursorImg :rotation="90" :styles="'margin-bottom:-5px'" />
             {{ $t("Skills.skills_back") }}
           </div>
           <div class="subTitle skills-text">
-            <g-image
-              src="~/assets/images/point.png"
-              width="25"
-              style="transform: rotateZ(90deg);margin-bottom: -7px;"
-              alt="point"
-            ></g-image>
+            <HandCursorImg :rotation="90" :styles="'margin-bottom:-5px'" />
             {{ $t("Skills.skills_front") }}
           </div>
           <div class="subTitle skills-text">
-            <g-image
-              src="~/assets/images/point.png"
-              width="25"
-              style="transform: rotateZ(90deg);margin-bottom: -7px;"
-              alt="point"
-            ></g-image>
+            <HandCursorImg :rotation="90" :styles="'margin-bottom:-5px'" />
             {{ $t("Skills.skills_fullstack") }}
           </div>
         </div>
@@ -83,7 +68,7 @@ query {
                             type
                             icon
                         }
-                         percentage
+                        percentage
                     }
                 }
             }
@@ -95,6 +80,7 @@ query {
 <script>
 import _ from "lodash";
 import { setColorByType } from "../utils";
+import HandCursorImg from "./HandCursorImg";
 
 export default {
   mounted() {
@@ -110,6 +96,9 @@ export default {
       active: true,
       profile: null,
     };
+  },
+  components: {
+    HandCursorImg,
   },
   methods: {
     onWaypoint(waypoint) {
