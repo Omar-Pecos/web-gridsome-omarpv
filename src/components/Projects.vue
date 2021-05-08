@@ -21,8 +21,10 @@
       />
 
       <div class="project-button">
-        <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button" @click="openUrl('/web/portfolio/')">{{
+        <!--   <g-link class="main-button" :to="$url('/portfolio/')">{{
+          $t("Navbar.portfolio")
+        }}</g-link> -->
+        <a class="main-button" @click="openUrl($url('/portfolio/'))">{{
           $t("Navbar.portfolio")
         }}</a>
       </div>
@@ -62,8 +64,7 @@
       </div>
 
       <div class="project-button">
-        <!-- <g-link class="main-button" to="/portfolio/">Portfolio</g-link> -->
-        <a class="main-button" @click="openUrl('/web/portfolio/')">{{
+        <a class="main-button" @click="openUrl($url('/portfolio/'))">{{
           $t("Navbar.portfolio")
         }}</a>
       </div>

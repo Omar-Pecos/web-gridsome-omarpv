@@ -3,7 +3,7 @@
     <!-- nav -->
     <header class="header" :class="{ 'dark-menu': $store.state.darkMode }">
       <a
-        href="/"
+        :href="$url('/')"
         class="logo"
         :style="{ display: [menuDisplay ? 'none' : 'block'] }"
       >
@@ -17,11 +17,7 @@
         </span>
       </a>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label
-        class="menu-icon"
-        style="color: white"
-        v-on:click="displayNav(menuDisplay)"
-      >
+      <label class="menu-icon" style="color: white" @click="displayNav()">
         <span
           class="navicon"
           :class="{ 'navicon-dark': $store.state.darkMode }"
@@ -34,29 +30,31 @@
           menuDisplay ? 'showContent' : 'block',
         ]"
       >
-        <li>
-          <a :href="webUrl + '/#skills'">{{ $t("Navbar.skills") }}</a>
+        <li @click="() => (menuDisplay = false)">
+          <a :href="$url('/#skills')">{{ $t("Navbar.skills") }}</a>
         </li>
-        <li>
-          <a :href="webUrl + '/#stack'">{{ $t("Navbar.stack") }}</a>
+        <li @click="() => (menuDisplay = false)">
+          <a :href="$url('/#stack')">{{ $t("Navbar.stack") }}</a>
         </li>
-        <li>
-          <a :href="webUrl + '/#education'">{{ $t("Navbar.education") }}</a>
+        <li @click="() => (menuDisplay = false)">
+          <a :href="$url('/#education')">{{ $t("Navbar.education") }}</a>
         </li>
-        <li>
-          <a :href="webUrl + '/#courses'">{{ $t("Navbar.courses") }}</a>
+        <li @click="() => (menuDisplay = false)">
+          <a :href="$url('/#courses')">{{ $t("Navbar.courses") }}</a>
         </li>
-        <li>
-          <a :href="webUrl + '/#projects'">{{ $t("Navbar.projects") }}</a>
+        <li @click="() => (menuDisplay = false)">
+          <a :href="$url('/#projects')">{{ $t("Navbar.projects") }}</a>
         </li>
-        <li>
-          <!-- <g-link to="/portfolio/">Portfolio</g-link> -->
-          <a style="cursor:pointer;" @click="openUrl('/web/portfolio/')">{{
+        <li @click="() => (menuDisplay = false)">
+          <!--  <g-link :to="$url('/portfolio/')">{{
+            $t("Navbar.portfolio")
+          }}</g-link> -->
+          <a style="cursor:pointer;" @click="openUrl($url('/portfolio/'))">{{
             $t("Navbar.portfolio")
           }}</a>
         </li>
-        <li>
-          <a :href="webUrl + '/#contact'">{{ $t("Navbar.contact") }}</a>
+        <li @click="() => (menuDisplay = false)">
+          <a :href="$url('/#contact')">{{ $t("Navbar.contact") }}</a>
         </li>
 
         <li class="translations">
@@ -98,7 +96,6 @@ import "vue-dark-mode-switch/dist/vue-dark-mode-switch.css";
 export default {
   data() {
     return {
-      webUrl: "https://omarpecos.com/web",
       menuDisplay: false,
       localeDropdown: false,
       langs: ["es", "en", "it", "fr"],
@@ -117,9 +114,8 @@ export default {
     }
   },
   methods: {
-    displayNav(menuDisplay) {
-      var value = !menuDisplay;
-      this.menuDisplay = value;
+    displayNav() {
+      this.menuDisplay = !this.menuDisplay;
     },
     openUrl(url) {
       window.open(url, "_self");

@@ -4,10 +4,12 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+const environment = process.env.GRIDSOME_ENV;
+
 module.exports = {
   siteName: "Mi web",
   icon: "./src/favicon.png",
   siteDescription: "Omar Pecos - Desarrollador Full Stack",
   plugins: [],
-  pathPrefix: "/web",
+  pathPrefix: environment === "production" ? "/web" : "",
 };
